@@ -7,6 +7,15 @@ type UserRegisterDto = {
   password: string;
 };
 
+type UserLoginDto = {
+  email: string;
+  password: string;
+};
+
 export const SignUpUser = async (payload: UserRegisterDto) => {
-  return axiosInstance.post("/users", payload);
+  return axiosInstance.post("/Auth/Register", payload);
+};
+
+export const LogInUser = async (payload: UserLoginDto) => {
+  return axiosInstance.post("/Auth/Login", payload);
 };

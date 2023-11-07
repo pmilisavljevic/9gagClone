@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { SignUpUser } from "src/services/client";
 
 // import { registerUser } from "../../services/client";
@@ -18,12 +18,12 @@ const validationSchema = yup.object({
     .required("Email is required"),
   password: yup
     .string()
-    .min(4, "Password should be of minimum 6 characters length")
+    .min(6, "Password should be of minimum 6 characters length")
     .required("Password is required"),
 });
 
 function SignupPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
