@@ -1,4 +1,4 @@
-import { axiosInstance } from "src/helpers/axiosInstance";
+import { axiosInstance, axiosWithToken } from "src/helpers/axiosInstance";
 
 type UserRegisterDto = {
   firstName: string;
@@ -7,7 +7,7 @@ type UserRegisterDto = {
   password: string;
 };
 
-type UserLoginDto = {
+export type UserLoginDto = {
   email: string;
   password: string;
 };
@@ -16,6 +16,10 @@ export const SignUpUser = async (payload: UserRegisterDto) => {
   return axiosInstance.post("/Auth/Register", payload);
 };
 
-export const LogInUser = async (payload: UserLoginDto) => {
+export const logInUser = async (payload: UserLoginDto) => {
   return axiosInstance.post("/Auth/Login", payload);
+};
+
+export const getUserInfo = () => {
+  return axiosWithToken.get("/Users/data");
 };

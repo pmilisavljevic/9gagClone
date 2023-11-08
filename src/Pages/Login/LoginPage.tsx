@@ -1,12 +1,13 @@
-// import { useNavigate } from "react-router-dom";
-import { LogInUser } from "src/services/client";
-
-// import { registerUser } from "../../services/client";
+import { useNavigate } from "react-router-dom";
+// import { LogInUser } from "src/services/client";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import NavBar from "src/Layout/NavBar";
+import { fetchUserInfo, getToken } from "src/store/userSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "src/store/store";
 // import { toast } from "react-toastify";
 
 const validationSchema = yup.object({
@@ -21,7 +22,8 @@ const validationSchema = yup.object({
 });
 
 function LoginPage() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   const formik = useFormik({
     initialValues: {
@@ -29,19 +31,10 @@ function LoginPage() {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      //
-      const registerUserFunction = async () => {
-        try {
-          await LogInUser(values);
-          // toast.success("Logging in successful");
-        } catch (err) {
-          // toast.error("There was some problem with logging in");
-          console.log(err);
-        }
-      };
-      registerUserFunction();
-      // navigate("/login");
+    onSubmit: async (values) => {
+      dispatch(getToken(values))
+        .then(() => dispatch(fetchUserInfo()))
+        .then(() => navigate("/"));
     },
   });
 

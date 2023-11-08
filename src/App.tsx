@@ -24,6 +24,5 @@ function App() {
 export default App;
 
 /*
-kako koristim headere za axios?
-gde storujem token? store ili local?
+
 */
