@@ -44,13 +44,13 @@ function LoginPage() {
   // const punjenje = true;
   // const greska = "greska je napravljena";
 
-  function navigateToPage() {
-    const token = localStorage.getItem("token");
+  // function navigateToPage() {
+  //   const token = localStorage.getItem("token");
 
-    if (token) {
-      navigate("/");
-    } else return <div>GRESKA</div>;
-  }
+  //   if (token) {
+  //     navigate("/");
+  //   } else return <div>GRESKA</div>;
+  // }
 
   const formik = useFormik({
     initialValues: {
@@ -60,8 +60,28 @@ function LoginPage() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       dispatch(getToken(values))
-        .then(() => dispatch(fetchUserInfo()))
-        .then(() => navigateToPage());
+        .then((tokenResult) => {
+          if (tokenResult.meta.requestStatus === "fulfilled") {
+            return dispatch(fetchUserInfo());
+          } else {
+            // Handle the token fetch error
+            throw new Error("Failed to get token");
+          }
+        })
+        .then((userInfoResult) => {
+          // Check if the fetchUserInfo thunk was fulfilled
+          if (userInfoResult.meta.requestStatus === "fulfilled") {
+            // Navigate to the desired route
+            navigate("/");
+          } else {
+            // Handle the user info fetch error
+            throw new Error("Failed to fetch user info");
+          }
+        })
+        .catch((error) => {
+          // Handle any errors that occurred during the dispatches
+          console.error(error);
+        });
     },
   });
 
