@@ -4,6 +4,7 @@ import "src/Styles/App.scss";
 import MainPage from "src/Pages/Main/MainPage";
 import LoginPage from "src/Pages/Login/LoginPage";
 import SignupPage from "src/Pages/Signup/SignupPage";
+import ProtectedRouteUser from "src/utils/ProtectedRouteUser";
 
 import { Provider } from "react-redux";
 import { store } from "src/store/store";
@@ -14,8 +15,22 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="signup" element={<SignupPage />} />
+          <Route
+            path="login"
+            element={
+              <ProtectedRouteUser>
+                <LoginPage />
+              </ProtectedRouteUser>
+            }
+          />
+          <Route
+            path="signup"
+            element={
+              <ProtectedRouteUser>
+                <SignupPage />
+              </ProtectedRouteUser>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </Provider>

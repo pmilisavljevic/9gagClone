@@ -20,6 +20,6 @@ export const logInUser = async (payload: UserLoginDto) => {
   return axiosInstance.post("/Auth/Login", payload);
 };
 
-export const getUserInfo = () => {
+export const getUserInfo = async () => {
   return axiosWithToken.get("/Users/data");
 };

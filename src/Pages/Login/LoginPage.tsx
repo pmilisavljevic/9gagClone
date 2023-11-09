@@ -3,10 +3,24 @@ import { useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  Alert,
+} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+
 import NavBar from "src/Layout/NavBar";
-import { fetchUserInfo, getToken } from "src/store/userSlice";
-import { useDispatch } from "react-redux";
+import {
+  fetchUserInfo,
+  getToken,
+  userError,
+  userStatus,
+} from "src/store/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "src/store/store";
 // import { toast } from "react-toastify";
 
@@ -24,6 +38,19 @@ const validationSchema = yup.object({
 function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const error = useSelector(userError);
+  const loading = useSelector(userStatus);
+  // const user = useSelector(userInfo);
+  // const punjenje = true;
+  // const greska = "greska je napravljena";
+
+  function navigateToPage() {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("/");
+    } else return <div>GRESKA</div>;
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -31,10 +58,10 @@ function LoginPage() {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       dispatch(getToken(values))
         .then(() => dispatch(fetchUserInfo()))
-        .then(() => navigate("/"));
+        .then(() => navigateToPage());
     },
   });
 
@@ -55,15 +82,14 @@ function LoginPage() {
             <Typography component="h1" variant="h5">
               Log In
             </Typography>
-
-            {/* <form onSubmit={formik.handleSubmit}> */}
+            {loading && <CircularProgress sx={{ mt: 2 }} />}
 
             <Box
               component="form"
               onSubmit={formik.handleSubmit}
               sx={{
                 width: 400,
-                mt: 5,
+                mt: 3,
                 mb: 4,
                 display: "flex",
                 flexDirection: "column",
@@ -106,8 +132,8 @@ function LoginPage() {
               >
                 Submit
               </Button>
+              {error && <Alert severity="error">{error}</Alert>}
             </Box>
-            {/* </form> */}
           </Box>
         </Container>
       </div>
