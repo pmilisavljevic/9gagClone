@@ -25,6 +25,12 @@ body {
   display: flex;
 }
 
-$accent-color: rgb(87, 87, 221); //Pages imports
-//Components imports
+$accent-color: rgb(87, 87, 221);
+//Pages imports
+@import "/src/Pages/Main/MainPage.scss";
+@import "/src/Pages/EditProfile/EditProfile.scss";
+@import "/src/Pages/EditProfile/EditProfileForm.scss"; //Components imports
 @import "/src/Layout/NavBar.scss";
+@import "/src/Pages/NewPost/NewPost.scss";
+@import "/src/Pages/NewPost/PostForm.scss";
+@import "/src/Pages/Main/PostComponent.scss";

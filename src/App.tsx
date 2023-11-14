@@ -8,6 +8,9 @@ import ProtectedRouteUser from "src/utils/ProtectedRouteUser";
 
 import { Provider } from "react-redux";
 import { store } from "src/store/store";
+import NewPost from "src/Pages/NewPost/NewPost";
+import PostPage from "src/Pages/Post/PostPage";
+import EditProfile from "src/Pages/EditProfile/EditProfile";
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function App() {
               </ProtectedRouteUser>
             }
           />
+          <Route path="submit" element={<NewPost />} />
+          <Route path="/gag/:id" element={<PostPage />} />
+          <Route path="edit-profile" element={<EditProfile />} />
         </Routes>
       </BrowserRouter>
     </Provider>

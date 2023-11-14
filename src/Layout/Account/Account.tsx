@@ -15,6 +15,8 @@ import { logout } from "src/store/userSlice";
 
 import { userInfo } from "src/store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { URL } from "src/helpers/constantsAndEnums";
+import { useNavigate } from "react-router-dom";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -22,6 +24,8 @@ export default function AccountMenu() {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const navigate = useNavigate();
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -29,9 +33,17 @@ export default function AccountMenu() {
   function handleLogout() {
     setAnchorEl(null);
     dispatch(logout());
+    navigate("/");
+  }
+
+  function handleNavigateToEditProfile() {
+    setAnchorEl(null);
+    navigate("/edit-profile");
   }
   const user = useSelector(userInfo);
   const dispatch = useDispatch();
+  const avatar = `${URL}${user?.profilePictureUrl}`;
+
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -44,7 +56,7 @@ export default function AccountMenu() {
             aria-expanded={open ? "true" : undefined}
           >
             <Avatar sx={{ width: 32, height: 32 }}>
-              {user?.profilePictureUrl}
+              <img src={avatar}></img>
             </Avatar>
           </IconButton>
         </Tooltip>
@@ -84,8 +96,8 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
+        <MenuItem onClick={handleNavigateToEditProfile}>
+          <Avatar /> Edit Profile
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Avatar /> My account

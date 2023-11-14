@@ -64,22 +64,17 @@ function LoginPage() {
           if (tokenResult.meta.requestStatus === "fulfilled") {
             return dispatch(fetchUserInfo());
           } else {
-            // Handle the token fetch error
             throw new Error("Failed to get token");
           }
         })
         .then((userInfoResult) => {
-          // Check if the fetchUserInfo thunk was fulfilled
           if (userInfoResult.meta.requestStatus === "fulfilled") {
-            // Navigate to the desired route
             navigate("/");
           } else {
-            // Handle the user info fetch error
             throw new Error("Failed to fetch user info");
           }
         })
         .catch((error) => {
-          // Handle any errors that occurred during the dispatches
           console.error(error);
         });
     },

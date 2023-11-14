@@ -1,27 +1,18 @@
-import { getUserInfo, logInUser } from "src/services/client";
+import {
+  EditProfileDto,
+  PictureDto,
+  getUserInfo,
+  logInUser,
+  updateEditedProfile,
+  uploadPicture,
+} from "src/services/client";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { UserLoginDto } from "src/services/client";
 // import axios from "axios";
 import { RootState } from "./store";
+import { InitialUserState, UserType } from "src/store/types";
 
-// const BASE_URL = "http://161.97.83.162:777";
-
-type UserType = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  profilePictureUrl: string;
-};
-
-type InitialState = {
-  user: UserType | null;
-  token: string | null;
-  loading: boolean;
-  error: string;
-};
-
-const initialState: InitialState = {
+const initialState: InitialUserState = {
   user: localStorage.getItem("User")
     ? (JSON.parse(localStorage.getItem("User") || "") as UserType)
     : null,
@@ -43,16 +34,26 @@ export const getToken = createAsyncThunk(
 export const fetchUserInfo = createAsyncThunk(
   "user / fetchUserInfo",
   async () => {
-    // const token = localStorage.getItem("token");
-
-    // const config = {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // };
-
-    // const response = await axios.get(`${BASE_URL}/Users/data`, config);
     const response = await getUserInfo();
     console.log(response.data);
 
+    return response.data;
+  }
+);
+
+export const uploadAvatar = createAsyncThunk(
+  "user / UploadAvatar",
+  async (image: PictureDto) => {
+    const response = await uploadPicture(image);
+    console.log(response);
+    return response.data.profilePictureUrl;
+  }
+);
+
+export const editProfile = createAsyncThunk(
+  "user / EditProfile ",
+  async (payload: EditProfileDto) => {
+    const response = await updateEditedProfile(payload);
     return response.data;
   }
 );
@@ -96,13 +97,21 @@ const userSlice = createSlice({
         localStorage.setItem("User", JSON.stringify(action.payload));
         state.user = action.payload;
 
-        console.log(state.user);
         state.loading = false;
         // state.error = "";
       })
       .addCase(fetchUserInfo.rejected, (state) => {
         state.loading = false;
         // state.error = "Failed to get user info";
+      })
+      .addCase(uploadAvatar.fulfilled, (state, action) => {
+        if (state.user) {
+          state.user.profilePictureUrl = action.payload;
+        }
+      })
+      .addCase(editProfile.fulfilled, (state, action) => {
+        localStorage.setItem("User", JSON.stringify(action.payload));
+        state.user = action.payload;
       });
   },
 });
