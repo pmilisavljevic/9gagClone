@@ -26,18 +26,8 @@ function MainPage() {
         {posts.map((post) => (
           <PostComponent
             key={post.id}
-            id={post.id}
-            userId={post.user.id}
-            userFirstName={post.user.firstName}
-            userLastName={post.user.lastName}
-            userProfilePicture={post.user.profilePictureUrl}
-            title={post.title}
-            content={post.content}
-            imgUrl={post.imageUrl}
-            dateCreated={post.createdAt}
-            likesCount={post.likesCount}
-            dislikesCount={post.dislikesCount}
-            userReaction={post.userReaction}
+            post={post}
+            className={"post--normal-title   "}
           />
         ))}
       </div>

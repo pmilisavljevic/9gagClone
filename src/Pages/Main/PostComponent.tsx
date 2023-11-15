@@ -2,56 +2,49 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { Link } from "react-router-dom";
 import { URL } from "src/helpers/constantsAndEnums";
+import { Post } from "src/store/types";
 
-type Post = {
-  id: number;
-  userId: number;
-  userFirstName: string;
-  userLastName: string;
-  userProfilePicture: string;
-  title: string;
-  content: string;
-  imgUrl: string;
-  dateCreated: string;
-  likesCount: number;
-  dislikesCount: number;
-  userReaction: null;
-};
+
+type Props = {
+  post:Post
+  className:string
+}
 
 const PostComponent = ({
-  id,
-  userId,
-  userFirstName,
-  userLastName,
-  userProfilePicture,
+ post:{ id,
   title,
+  user:{
+    email,
+    firstName,lastName,profilePictureUrl
+  },
   content,
-  imgUrl,
-  dateCreated,
+  imageUrl,
+  createdAt,
   likesCount,
   dislikesCount,
-  userReaction,
-}: Post) => {
-  const avatar = `${URL}${userProfilePicture}`;
+  userReaction,},
+  className
+}: Props) => {
+  const avatar = `${URL}${profilePictureUrl}`;
   return (
-    <div className="post">
+    <div className={`post ${className}`}>
       <Link to={`/gag/${id}`} className="post__title">
         {title}
       </Link>
       <p className="post__content">{content}</p>
       <Link to={`/gag/${id}`}>
         <div className="post__img-wrap">
-          <img className="post__img" src={`${URL}${imgUrl}`}></img>
+          <img className="post__img" src={`${URL}${imageUrl}`}></img>
         </div>
       </Link>
       <div className="post__flex">
         <img className="post__avatar" src={avatar}></img>
 
         <p>
-          {userFirstName} {}
-          {userLastName}
+          {firstName} {}
+          {lastName}
         </p>
-        <p>Created on {dateCreated}</p>
+        <p>Created on {createdAt}</p>
         <span>
           <ThumbUpIcon />
           <p>{likesCount}</p>

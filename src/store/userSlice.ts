@@ -24,7 +24,9 @@ const initialState: InitialUserState = {
 export const getToken = createAsyncThunk(
   "user / getToken",
   async (info: UserLoginDto) => {
+    console.log("asdf");
     const response = await logInUser(info);
+    
     console.log(response);
 
     return response.data.token;

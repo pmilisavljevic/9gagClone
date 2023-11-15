@@ -22,6 +22,7 @@ import {
 } from "src/store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "src/store/store";
+import { getUserInfo } from "src/services/client";
 // import { toast } from "react-toastify";
 
 const validationSchema = yup.object({
@@ -47,25 +48,22 @@ function LoginPage() {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      dispatch(getToken(values))
-        .then((tokenResult) => {
-          if (tokenResult.meta.requestStatus === "fulfilled") {
-            return dispatch(fetchUserInfo());
-          } else {
-            throw new Error("Failed to get token");
-          }
-        })
-        .then((userInfoResult) => {
-          if (userInfoResult.meta.requestStatus === "fulfilled") {
-            navigate("/");
-          } else {
-            throw new Error("Failed to fetch user info");
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    onSubmit: async (values) => {
+      try{
+        const data = await dispatch(getToken(values))
+        console.log(data);
+        if(data.meta.requestStatus === "rejected"){
+          return
+        }
+        await dispatch(fetchUserInfo())
+        navigate('/')
+        
+      }catch(e){
+        console.log('kurac');
+        
+      }
+     
+      
     },
   });
 

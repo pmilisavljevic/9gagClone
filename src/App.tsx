@@ -54,4 +54,13 @@ kako da izgleda pojedinacan post?
 da li mogu thunk-ovi sa .addCase da se razdvoje?
 sta da stavim u sidebar?
 
+TODO
+likes/dislike
+ako neulogovani pokusa da lajkuje, redirect na login i toastify da se uloguje
+prijateljstva
+pages: my friends, friend requests, my post, postovi drugih usera, postovi lajkovi od stranre prijatelja
+toastovi
+redirect sa registera na login 
+samo jedan axioinstance sa tokenom
+dodati headere direktno u axios in servicers
 */
