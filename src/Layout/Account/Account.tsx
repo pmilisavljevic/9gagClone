@@ -45,7 +45,7 @@ export default function AccountMenu() {
   const avatar = `${URL}${user?.profilePictureUrl}`;
 
   return (
-    <React.Fragment>
+    <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton
@@ -122,6 +122,6 @@ export default function AccountMenu() {
           Logout
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </>
   );
 }

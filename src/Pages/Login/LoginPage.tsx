@@ -40,17 +40,6 @@ function LoginPage() {
   const dispatch = useDispatch<AppDispatch>();
   const error = useSelector(userError);
   const loading = useSelector(userStatus);
-  // const user = useSelector(userInfo);
-  // const punjenje = true;
-  // const greska = "greska je napravljena";
-
-  // function navigateToPage() {
-  //   const token = localStorage.getItem("token");
-
-  //   if (token) {
-  //     navigate("/");
-  //   } else return <div>GRESKA</div>;
-  // }
 
   const formik = useFormik({
     initialValues: {

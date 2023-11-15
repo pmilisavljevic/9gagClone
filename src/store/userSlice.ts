@@ -96,7 +96,6 @@ const userSlice = createSlice({
       .addCase(fetchUserInfo.fulfilled, (state, action) => {
         localStorage.setItem("User", JSON.stringify(action.payload));
         state.user = action.payload;
-
         state.loading = false;
         // state.error = "";
       })
@@ -110,8 +109,8 @@ const userSlice = createSlice({
         }
       })
       .addCase(editProfile.fulfilled, (state, action) => {
-        localStorage.setItem("User", JSON.stringify(action.payload));
         state.user = action.payload;
+        localStorage.setItem("User", JSON.stringify(action.payload));
       });
   },
 });

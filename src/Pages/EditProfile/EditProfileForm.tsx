@@ -105,7 +105,11 @@ function EditProfileForm() {
         <button type="submit">Save Profile</button>
       </Box>
 
-      <Box onSubmit={handleAvatarSubmit} component="form">
+      <Box
+        onSubmit={handleAvatarSubmit}
+        component="form"
+        className="upload-avatar"
+      >
         {preview ? (
           <>
             <img

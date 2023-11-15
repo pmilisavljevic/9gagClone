@@ -17,12 +17,12 @@ function MainPage() {
     dispatch(fetchPosts());
   }, [dispatch]);
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   return (
     <>
       <NavBar />
       <div className="main-page__container">
+        {loading && <div>Loading...</div>}
         {posts.map((post) => (
           <PostComponent
             key={post.id}

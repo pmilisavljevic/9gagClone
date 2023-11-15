@@ -45,5 +45,13 @@ function App() {
 export default App;
 
 /*
+promeniti odakle dolazi state za pojedinacan post
+srediti css, staviti klase na material elemente
+srediti hendlovanje errora i loadinga
+objediniti sve buttone
+
+kako da izgleda pojedinacan post?
+da li mogu thunk-ovi sa .addCase da se razdvoje?
+sta da stavim u sidebar?
 
 */
