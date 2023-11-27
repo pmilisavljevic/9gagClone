@@ -121,39 +121,6 @@ function PostForm() {
         </>
       )}
     </Box>
-    // <form onSubmit={handleSubmit}>
-    //   <div>
-    //     <label htmlFor="title">Title:</label>
-    //     <input
-    //       type="text"
-    //       id="title"
-    //       value={title}
-    //       onChange={handleTitleChange}
-    //     />
-    //   </div>
-    //   <div>
-    //     <label htmlFor="image">Image:</label>
-    //     <input
-    //       type="file"
-    //       id="image"
-    //       accept="image/*"
-    //       onChange={handleImageChange}
-    //     />
-    //     {preview && (
-    //       <>
-    //         <img
-    //           src={preview}
-    //           style={{ maxWidth: "100%", padding: "20px" }}
-    //           alt="Preview"
-    //         />
-    //         <button type="button" onClick={handleRemoveImage}>
-    //           Remove Image
-    //         </button>
-    //       </>
-    //     )}
-    //   </div>
-    //   <button type="submit">Submit Post</button>
-    // </form>
   );
 }
 

@@ -1,4 +1,4 @@
-import { axiosInstance, axiosWithToken } from "src/helpers/axiosInstance";
+import { axiosWithToken } from "src/helpers/axiosInstance";
 
 type UserRegisterDto = {
   firstName: string;
@@ -37,11 +37,11 @@ export type EditProfileDto = {
 };
 
 export const SignUpUser = async (payload: UserRegisterDto) => {
-  return axiosInstance.post("/Auth/Register", payload);
+  return axiosWithToken.post("/Auth/Register", payload);
 };
 
 export const logInUser = async (payload: UserLoginDto) => {
-  return axiosInstance.post("/Auth/Login", payload);
+  return axiosWithToken.post("/Auth/Login", payload);
 };
 
 export const getUserInfo = async () => {
@@ -50,6 +50,17 @@ export const getUserInfo = async () => {
 
 export const getPosts = async () => {
   return axiosWithToken.get("/Posts");
+};
+
+export const getUserPostsAxios = async (userId: number) => {
+  return axiosWithToken.get(`/Posts/belonging-to/${userId}`);
+};
+export const getFriendLikedPostsAxios = async (userId: number) => {
+  return axiosWithToken.get(`/Posts/liked-by-friend/${userId}`);
+};
+
+export const getSinglePost = async (postId: number) => {
+  return axiosWithToken.get(`/Posts/${postId}`);
 };
 
 export const postPost = async (payload: PostDto) => {
@@ -70,4 +81,31 @@ export const uploadPicture = async (payload: PictureDto) => {
 
 export const updateEditedProfile = async (payload: EditProfileDto) => {
   return axiosWithToken.post("/Users/update-profile", payload);
+};
+
+export const thumbsUp = async (postId: number) => {
+  return axiosWithToken.post(`/Posts/like-dislike/${postId}`, { reaction: 1 });
+};
+
+export const thumbsDown = async (postId: number) => {
+  return axiosWithToken.post(`/Posts/like-dislike/${postId}`, { reaction: 2 });
+};
+
+export const addFriendAxios = async (userId: number) => {
+  return axiosWithToken.post(`/Users/make-friend-request/${userId}`);
+};
+
+export const fetchFriendRequestsAxios = async () => {
+  return axiosWithToken.get("/Users/get-my-friend-requests");
+};
+
+export const acceptFriendRequestAxios = async (requestId: number) => {
+  return axiosWithToken.post(`/Users/accept-friend-request/${requestId}`);
+};
+export const declineFriendRequestAxios = async (requestId: number) => {
+  return axiosWithToken.post(`/Users/decline-friend-request/${requestId}`);
+};
+
+export const fetchMyFriendsAxios = async () => {
+  return axiosWithToken.get("/Users/get-friends");
 };

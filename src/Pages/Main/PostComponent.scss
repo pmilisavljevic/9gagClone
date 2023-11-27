@@ -60,4 +60,25 @@
       }
     }
   }
+  &__tup {
+    cursor: pointer;
+    &-clicked {
+      color: $accent-color;
+      transform: scale(1.2);
+    }
+  }
+  &__tup:hover {
+    transform: scale(1.2);
+  }
+
+  &__tdown {
+    cursor: pointer;
+    &-clicked {
+      color: rgb(179, 52, 52);
+      transform: scale(1.2);
+    }
+  }
+  &__tdown:hover {
+    transform: scale(1.2);
+  }
 }

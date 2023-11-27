@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import NavBar from "src/Layout/NavBar";
 import {
   fetchUserInfo,
   getToken,
@@ -49,27 +48,22 @@ function LoginPage() {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      try{
-        const data = await dispatch(getToken(values))
+      try {
+        const data = await dispatch(getToken(values));
         console.log(data);
-        if(data.meta.requestStatus === "rejected"){
-          return
+        if (data.meta.requestStatus === "rejected") {
+          return;
         }
-        await dispatch(fetchUserInfo())
-        navigate('/')
-        
-      }catch(e){
-        console.log('kurac');
-        
+        await dispatch(fetchUserInfo());
+        navigate("/");
+      } catch (e) {
+        console.log("kurac");
       }
-     
-      
     },
   });
 
   return (
     <>
-      <NavBar />
       <div>
         <Container component="main" maxWidth="lg">
           <Box

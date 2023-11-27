@@ -1,6 +1,9 @@
 import {
   EditProfileDto,
   PictureDto,
+  addFriendAxios,
+  fetchFriendRequestsAxios,
+  fetchMyFriendsAxios,
   getUserInfo,
   logInUser,
   updateEditedProfile,
@@ -19,15 +22,14 @@ const initialState: InitialUserState = {
   token: localStorage.getItem("token") ? localStorage.getItem("token") : null,
   loading: false,
   error: "",
+  friendRequests: [],
+  myFriends: [],
 };
 
 export const getToken = createAsyncThunk(
   "user / getToken",
   async (info: UserLoginDto) => {
-    console.log("asdf");
     const response = await logInUser(info);
-    
-    console.log(response);
 
     return response.data.token;
   }
@@ -56,6 +58,30 @@ export const editProfile = createAsyncThunk(
   "user / EditProfile ",
   async (payload: EditProfileDto) => {
     const response = await updateEditedProfile(payload);
+    return response.data;
+  }
+);
+
+export const addFriend = createAsyncThunk(
+  "user/addFriend",
+  async (userId: number) => {
+    const response = await addFriendAxios(userId);
+    return response.data;
+  }
+);
+
+export const fetchFriendRequests = createAsyncThunk(
+  "user/fetchFriendRequests ",
+  async () => {
+    const response = await fetchFriendRequestsAxios();
+    return response.data;
+  }
+);
+
+export const fetchMyFriends = createAsyncThunk(
+  "user/fetchMyFriends",
+  async () => {
+    const response = await fetchMyFriendsAxios();
     return response.data;
   }
 );
@@ -109,11 +135,23 @@ const userSlice = createSlice({
         if (state.user) {
           state.user.profilePictureUrl = action.payload;
         }
+        const storedData = localStorage.getItem("User");
+        if (storedData) {
+          const data = JSON.parse(storedData);
+          data.profilePictureUrl = action.payload;
+          localStorage.setItem("User", JSON.stringify(data));
+        }
       })
       .addCase(editProfile.fulfilled, (state, action) => {
         state.user = action.payload;
         localStorage.setItem("User", JSON.stringify(action.payload));
       });
+    builder.addCase(fetchFriendRequests.fulfilled, (state, action) => {
+      state.friendRequests = action.payload;
+    });
+    builder.addCase(fetchMyFriends.fulfilled, (state, action) => {
+      state.myFriends = action.payload;
+    });
   },
 });
 

@@ -40,6 +40,17 @@ export default function AccountMenu() {
     setAnchorEl(null);
     navigate("/edit-profile");
   }
+
+  function handleNavigateToRequestsToMe() {
+    navigate("/requests-to-me");
+  }
+
+  function handleNavigateToMyPosts() {
+    navigate("/my-posts");
+  }
+  function handleNavigateToMyFriends() {
+    navigate("/my-friends");
+  }
   const user = useSelector(userInfo);
   const dispatch = useDispatch();
   const avatar = `${URL}${user?.profilePictureUrl}`;
@@ -99,21 +110,21 @@ export default function AccountMenu() {
         <MenuItem onClick={handleNavigateToEditProfile}>
           <Avatar /> Edit Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
+        <MenuItem onClick={handleNavigateToRequestsToMe}>
+          <Avatar /> Requests To Me
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleNavigateToMyPosts}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
-          Add another account
+          My Posts
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleNavigateToMyFriends}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
-          Settings
+          My Friends
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>

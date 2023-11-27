@@ -8,13 +8,17 @@ export type Post = {
   imageUrl: string;
   likesCount: number;
   dislikesCount: number;
-  userReaction: null;
+  userReaction: null | number;
 };
 
 export type InitialPostType = {
   posts: Post[];
   loading: boolean;
   error: string | null;
+  singlePost: Post | null;
+  myPosts: Post[];
+  friendPosts: Post[];
+  likedByFriendPosts: Post[];
 };
 
 export type UserType = {
@@ -23,6 +27,23 @@ export type UserType = {
   lastName: string;
   email: string;
   profilePictureUrl: string;
+  isFriendsWith: boolean;
+};
+
+// type Requestee = {
+//   id: number;
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   profilePictureUrl: string;
+// };
+
+export type friendRequest = {
+  id: number;
+  requester: UserType;
+  requested: UserType;
+  requestDate: string;
+  status: number;
 };
 
 export type InitialUserState = {
@@ -30,4 +51,6 @@ export type InitialUserState = {
   token: string | null;
   loading: boolean;
   error: string;
+  friendRequests: friendRequest[];
+  myFriends: UserType[];
 };

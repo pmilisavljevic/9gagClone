@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "src/store/postsSlice";
 import { RootState } from "src/store/store";
 import { AppDispatch } from "src/store/store";
-import NavBar from "src/Layout/NavBar";
 
 import PostComponent from "src/Pages/Main/PostComponent";
 
@@ -13,25 +12,23 @@ function MainPage() {
     (state: RootState) => state.posts
   );
 
+  console.log(posts);
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
   if (error) return <div>Error: {error}</div>;
   return (
-    <>
-      <NavBar />
-      <div className="main-page__container">
-        {loading && <div>Loading...</div>}
-        {posts.map((post) => (
-          <PostComponent
-            key={post.id}
-            post={post}
-            className={"post--normal-title   "}
-          />
-        ))}
-      </div>
-    </>
+    <div className="main-page__container">
+      {loading && <div>Loading...</div>}
+      {posts.map((post) => (
+        <PostComponent
+          key={post.id}
+          post={post}
+          className={"post--normal-title   "}
+        />
+      ))}
+    </div>
   );
 }
 
