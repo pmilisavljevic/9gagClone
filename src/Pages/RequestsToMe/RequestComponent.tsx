@@ -10,6 +10,15 @@ type Props = {
 };
 
 function RequestComponent({ request }: Props) {
+  const dateString = request.requestDate;
+  const date = new Date(dateString);
+
+  const readableDate = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   const avatar = `${URL}${request.requester.profilePictureUrl}`;
   const requestId = request.id;
   async function handleAcceptRequest(requestId: number) {
@@ -21,14 +30,28 @@ function RequestComponent({ request }: Props) {
 
   return (
     <div className="request-component">
-      <img className="request-component__avatar" src={avatar}></img>
-      <p>
-        {request.requester.firstName} {}
-        {request.requester.lastName}
-      </p>
-      <p>On {request.requestDate}</p>
-      <button onClick={() => handleAcceptRequest(requestId)}>Accept</button>
-      <button onClick={() => handleDeclineRequest(requestId)}>Decline</button>
+      <div className="flex">
+        <img className="request-component__avatar" src={avatar}></img>
+        <p>
+          {request.requester.firstName} {}
+          {request.requester.lastName}
+        </p>
+      </div>
+      <p> {readableDate}</p>
+      <div className="request-component__btns">
+        <button
+          className="request-component__btn"
+          onClick={() => handleAcceptRequest(requestId)}
+        >
+          Accept
+        </button>
+        <button
+          className="request-component__btn"
+          onClick={() => handleDeclineRequest(requestId)}
+        >
+          Decline
+        </button>
+      </div>
     </div>
   );
 }

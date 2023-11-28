@@ -17,6 +17,7 @@ import MainLayout from "src/Layout/MainLayout";
 import MyFriends from "src/Pages/MyFriends/MyFriends";
 import PostsByFriend from "./Pages/PostsByFriend/PostsByFriend";
 import PostsLikedByFriend from "./Pages/PostsLikedByFriend/PostsLikedByFriend";
+import ProtectedRouteGuest from "./utils/ProtectedRouteGuest";
 
 function App() {
   return (
@@ -41,16 +42,63 @@ function App() {
                 </ProtectedRouteUser>
               }
             />
-            <Route path="submit" element={<NewPost />} />
+            <Route
+              path="submit"
+              element={
+                <ProtectedRouteGuest>
+                  <NewPost />
+                </ProtectedRouteGuest>
+              }
+            />
+
             <Route path="/gag/:id" element={<PostPage />} />
-            <Route path="edit-profile" element={<EditProfile />} />
-            <Route path="requests-to-me" element={<RequestsToMe />} />
-            <Route path="my-posts" element={<MyPosts />} />
-            <Route path="my-friends" element={<MyFriends />} />
-            <Route path="posts-by-friend/:id" element={<PostsByFriend />} />
+            <Route
+              path="edit-profile"
+              element={
+                <ProtectedRouteGuest>
+                  <EditProfile />
+                </ProtectedRouteGuest>
+              }
+            />
+            <Route
+              path="requests-to-me"
+              element={
+                <ProtectedRouteGuest>
+                  <RequestsToMe />
+                </ProtectedRouteGuest>
+              }
+            />
+            <Route
+              path="my-posts"
+              element={
+                <ProtectedRouteGuest>
+                  <MyPosts />
+                </ProtectedRouteGuest>
+              }
+            />
+            <Route
+              path="my-friends"
+              element={
+                <ProtectedRouteGuest>
+                  <MyFriends />
+                </ProtectedRouteGuest>
+              }
+            />
+            <Route
+              path="posts-by-friend/:id"
+              element={
+                <ProtectedRouteGuest>
+                  <PostsByFriend />
+                </ProtectedRouteGuest>
+              }
+            />
             <Route
               path="posts-liked-by-friend/:id"
-              element={<PostsLikedByFriend />}
+              element={
+                <ProtectedRouteGuest>
+                  <PostsLikedByFriend />
+                </ProtectedRouteGuest>
+              }
             />
           </Routes>
         </MainLayout>
@@ -65,14 +113,18 @@ export default App;
 
 
 TODO
-srediti css, staviti klase na material elemente
-srediti hendlovanje errora i loadinga
-objediniti sve buttone
-kako da izgleda pojedinacan post? SREDITI CLASSNAME
-sta da stavim u sidebar?
+da li moze user da lajkuje svoje postove?
 
+srediti css, staviti klase na material elemente DONEish
+objediniti sve buttone DONE
+kako da izgleda pojedinacan post? DONE
+protected routes za guesta DONE
 prijateljstva DONE(moram da refreshujem nakon accept da bi request nestao)
-
-ako neulogovani pokusa da lajkuje, redirect na login i toastify da se uloguje
-
+jedna funkcija za like/dislike DONE
+ako neulogovani pokusa da lajkuje ili doda prijatelja, redirect na login i toastify da se uloguje DONE 
+redirekcije DONE
+toastify!!!
+@media!!!
+srediti hendlovanje errora i loadinga!!!
+paginacija
 */

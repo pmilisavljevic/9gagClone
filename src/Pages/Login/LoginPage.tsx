@@ -21,7 +21,7 @@ import {
 } from "src/store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "src/store/store";
-import { getUserInfo } from "src/services/client";
+// import { getUserInfo } from "src/services/client";
 // import { toast } from "react-toastify";
 
 const validationSchema = yup.object({
@@ -57,7 +57,7 @@ function LoginPage() {
         await dispatch(fetchUserInfo());
         navigate("/");
       } catch (e) {
-        console.log("kurac");
+        console.log(e);
       }
     },
   });

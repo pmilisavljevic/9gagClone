@@ -89,6 +89,27 @@ export const thumbsDownPost = createAsyncThunk(
   }
 );
 
+export const handlePostReaction = createAsyncThunk(
+  "posts/handlePostReaction",
+  async ({
+    postId,
+    reactionType,
+  }: {
+    postId: number;
+    reactionType: "like" | "dislike";
+  }) => {
+    try {
+      const response =
+        reactionType === "like"
+          ? await thumbsUp(postId)
+          : await thumbsDown(postId);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const fetchFriendPosts = createAsyncThunk(
   "posts/fetchFriendPosts",
   async (userId: number) => {
@@ -147,20 +168,21 @@ function fuck(builder: ActionReducerMapBuilder<InitialPostType>) {
       state.error = "Failed to submit post";
     });
 
-  builder.addCase(thumbsUpPost.fulfilled, (state, action) => {
+  builder.addCase(handlePostReaction.fulfilled, (state, action) => {
     const { id } = action.payload;
     const postIndex = state.posts.findIndex((post) => post.id === id);
     state.posts[postIndex] = { ...state.posts[postIndex], ...action.payload };
   });
-  builder.addCase(thumbsDownPost.fulfilled, (state, action) => {
-    const { id } = action.payload;
-    const postIndex = state.posts.findIndex((post) => post.id === id);
-    state.posts[postIndex] = { ...state.posts[postIndex], ...action.payload };
-  });
-  builder.addCase(fetchSinglePost.fulfilled, (state, action) => {
-    state.singlePost = action.payload;
-    state.loading = false;
-  });
+
+  builder
+    .addCase(fetchSinglePost.fulfilled, (state, action) => {
+      state.singlePost = action.payload;
+      state.loading = false;
+    })
+
+    .addCase(fetchSinglePost.pending, (state) => {
+      state.loading = true;
+    });
   builder.addCase(fetchMyPosts.fulfilled, (state, action) => {
     state.myPosts = action.payload;
     state.loading = false;

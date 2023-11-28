@@ -18,6 +18,7 @@ picture {
 }
 body {
   font-family: "Roboto", sans-serif;
+  font-size: 14px;
   //   line-height: 1.5;
 }
 
@@ -25,14 +26,44 @@ body {
   display: flex;
 }
 
+@mixin btn {
+  padding: 8px 16px;
+  border-radius: 25px;
+  background: $accent-color;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: darken($accent-color, 10%);
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+    animation: pulse 1s infinite;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
 $accent-color: rgb(87, 87, 221);
+
 //Pages imports
 @import "/src/Pages/Main/MainPage.scss";
 @import "/src/Pages/EditProfile/EditProfile.scss";
-@import "/src/Pages/EditProfile/EditProfileForm.scss"; //Components imports
+@import "/src/Pages/EditProfile/EditProfileForm.scss";
+@import "/src/Pages/RequestsToMe/RequestsToMe.scss";
+@import "/src/Pages/Post/PostPage.scss";
+//Components imports
 @import "/src/Layout/NavBar.scss";
 @import "/src/Pages/NewPost/NewPost.scss";
 @import "/src/Pages/NewPost/PostForm.scss";
 @import "/src/Pages/Main/PostComponent.scss";
 @import "/src/pages/RequestsToMe/RequestComponent.scss";
 @import "/src/Layout/MainLayout.scss";
+@import "/src/Styles/reusables.scss";
+@import "/src/Pages/MyFriends/MyFriendComponent/MyFriendComponent.scss";

@@ -1,11 +1,12 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { PictureDto, UpdateProfilePayload } from "src/services/client";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "src/store/store";
 import { editProfile, uploadAvatar } from "src/store/userSlice";
+import ClearIcon from "@mui/icons-material/Clear";
 
 function EditProfileForm() {
   const localUser = JSON.parse(localStorage.getItem("User") || "");
@@ -83,9 +84,7 @@ function EditProfileForm() {
         component="form"
         className="edit-profile-form"
       >
-        <Typography component="h1" variant="h5">
-          Edit Profile
-        </Typography>
+        <h2>Edit Profile</h2>
         <TextField
           fullWidth
           id="firstName"
@@ -102,7 +101,9 @@ function EditProfileForm() {
           value={profileUpdate.lastName}
           onChange={handleOnChange}
         />
-        <button type="submit">Save Profile</button>
+        <button className="edit-profile-form__btn" type="submit">
+          Save Profile
+        </button>
       </Box>
 
       <Box
@@ -112,15 +113,24 @@ function EditProfileForm() {
       >
         {preview ? (
           <>
-            <img
-              src={preview}
-              style={{ maxWidth: "100%", padding: "10px" }}
-              alt="Preview"
-            />
-            <button type="button" onClick={handleRemoveImage}>
-              Remove Image
+            <div className="edit-profile-form__img-wrp">
+              <img
+                src={preview}
+                // style={{ maxWidth: "80%", padding: "10px" }}
+                alt="Preview"
+              />
+              <button
+                className="edit-profile-form__btn-remove"
+                type="button"
+                onClick={handleRemoveImage}
+              >
+                <ClearIcon />
+              </button>
+            </div>
+
+            <button className="edit-profile-form__btn" type="submit">
+              Save profile image
             </button>
-            <button type="submit">Save profile image</button>
           </>
         ) : (
           <Button
@@ -129,7 +139,7 @@ function EditProfileForm() {
             startIcon={<CloudUploadIcon />}
             size="small"
           >
-            Upload file
+            Choose file
             <VisuallyHiddenInput
               type="file"
               id="image"

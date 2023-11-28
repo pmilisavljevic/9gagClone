@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { useState, ChangeEvent, FormEvent } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
@@ -7,6 +7,7 @@ import { submitPost } from "src/store/postsSlice";
 import { AppDispatch } from "src/store/store";
 import { PostDto } from "src/services/client";
 import { useNavigate } from "react-router-dom";
+import ClearIcon from "@mui/icons-material/Clear";
 
 function PostForm() {
   const [title, setTitle] = useState<string>("");
@@ -75,9 +76,7 @@ function PostForm() {
 
   return (
     <Box onSubmit={handleSubmit} component="form" className="post-form">
-      <Typography component="h1" variant="h5">
-        Create Post
-      </Typography>
+      <h2>Create Post</h2>
       <TextField
         fullWidth
         id="title"
@@ -99,7 +98,7 @@ function PostForm() {
         variant="contained"
         startIcon={<CloudUploadIcon />}
       >
-        Upload file
+        Choose file
         <VisuallyHiddenInput
           type="file"
           id="image"
@@ -109,14 +108,23 @@ function PostForm() {
       </Button>
       {preview && (
         <>
-          <img
-            src={preview}
-            style={{ maxWidth: "100%", padding: "10px" }}
-            alt="Preview"
-          />
-          <button type="submit">Submit Post</button>
-          <button type="button" onClick={handleRemoveImage}>
-            Remove Image
+          <div className="post-form__img-wrp">
+            <img
+              src={preview}
+              // style={{ maxWidth: "80%", padding: "10px" }}
+              alt="Preview"
+            />
+            <button
+              className="post-form__btn-remove"
+              type="button"
+              onClick={handleRemoveImage}
+            >
+              <ClearIcon />
+            </button>
+          </div>
+
+          <button className="post-form__btn" type="submit">
+            Submit Post
           </button>
         </>
       )}

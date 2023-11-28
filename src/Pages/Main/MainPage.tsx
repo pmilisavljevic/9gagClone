@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "src/store/postsSlice";
 import { RootState } from "src/store/store";
 import { AppDispatch } from "src/store/store";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import PostComponent from "src/Pages/Main/PostComponent";
 
@@ -12,7 +13,6 @@ function MainPage() {
     (state: RootState) => state.posts
   );
 
-  console.log(posts);
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
@@ -20,13 +20,13 @@ function MainPage() {
   if (error) return <div>Error: {error}</div>;
   return (
     <div className="main-page__container">
-      {loading && <div>Loading...</div>}
+      {loading && (
+        <div className="loading">
+          <CircularProgress />
+        </div>
+      )}
       {posts.map((post) => (
-        <PostComponent
-          key={post.id}
-          post={post}
-          className={"post--normal-title   "}
-        />
+        <PostComponent key={post.id} post={post} />
       ))}
     </div>
   );

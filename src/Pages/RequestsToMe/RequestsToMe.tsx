@@ -14,7 +14,8 @@ function RequestsToMe() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="requests-to-me">
+      <h2>My Friend Requests</h2>
       {friendRequests.map((request) => (
         <RequestComponent key={request.id} request={request} />
       ))}

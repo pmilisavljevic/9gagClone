@@ -1,8 +1,8 @@
 .post {
   border-bottom: 1px solid #ddd;
-  padding: 20px;
-  padding-block-end: 30px;
-  margin-bottom: 20px;
+  padding-inline: 20px;
+  // padding-block-end: 15px;
+  margin-top: 20px;
   // border-radius: 10px;
   // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
@@ -11,20 +11,26 @@
     margin-bottom: 10px;
     text-decoration: none;
     font-weight: 600;
+    color: black;
+    &:visited {
+      color: black;
+    }
     &:hover {
       color: $accent-color;
+      // font-weight: 800;
     }
   }
 
   &__content {
-    font-size: 16px;
+    font-size: 18px;
     color: #666;
-    margin-bottom: 10px;
+    margin-block: 10px;
   }
 
   &__img-wrap {
     background-color: #f0f0f0;
     border-radius: 5px;
+    // margin-bottom: 10px;
   }
 
   &__img {
@@ -32,7 +38,6 @@
     max-height: 500px;
     height: auto;
     display: block;
-    margin-bottom: 10px;
     margin-inline: auto;
   }
 
@@ -41,25 +46,44 @@
     width: 30px;
     border-radius: 50%;
   }
-
   &__flex {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-block: 10px;
+    padding-inline: 5px;
+  }
 
-    p {
-      margin: 0 10px;
+  &__name {
+    font-size: 12px;
+  }
+
+  &__friend {
+    &__user {
+      background-color: rgb(158, 75, 75);
+      font-size: 14px;
+      padding: 2px 5px;
+      border-radius: 10px;
     }
-
-    span {
-      display: flex;
-      align-items: center;
-
-      p {
-        margin-left: 5px;
-      }
+    &__friend {
+      font-size: 14px;
+      background-color: rgba(81, 143, 52, 0.808);
+      padding: 2px 5px;
+      border-radius: 10px;
+    }
+    button {
+      @include btn;
+      padding: 4px 8px;
     }
   }
+
+  &__likes {
+    span {
+      display: flex;
+      gap: 5px;
+    }
+  }
+
   &__tup {
     cursor: pointer;
     &-clicked {
@@ -81,4 +105,10 @@
   &__tdown:hover {
     transform: scale(1.2);
   }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

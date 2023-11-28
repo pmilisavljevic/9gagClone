@@ -25,8 +25,14 @@ function PostPage() {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="main-page__container">
-      {singlePost && <PostComponent key={singlePost.id} post={singlePost} />}
+    <div>
+      {singlePost && (
+        <PostComponent
+          key={singlePost.id}
+          post={singlePost}
+          className="post-page"
+        />
+      )}
     </div>
   );
 }

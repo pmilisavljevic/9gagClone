@@ -1,0 +1,38 @@
+.my-friend-component {
+  //   background-color: lightblue;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 2px solid rgb(73, 73, 73);
+  &__avatar {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+  }
+  &__flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 10px;
+    p {
+      font-size: 18px;
+    }
+  }
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    justify-items: center;
+  }
+  &__button {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: rgb(0, 207, 207);
+    border-radius: 10px;
+    font-weight: 600;
+    &:hover {
+      color: red;
+    }
+  }
+}

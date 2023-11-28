@@ -107,13 +107,6 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleNavigateToEditProfile}>
-          <Avatar /> Edit Profile
-        </MenuItem>
-        <MenuItem onClick={handleNavigateToRequestsToMe}>
-          <Avatar /> Requests To Me
-        </MenuItem>
-        <Divider />
         <MenuItem onClick={handleNavigateToMyPosts}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
@@ -126,6 +119,15 @@ export default function AccountMenu() {
           </ListItemIcon>
           My Friends
         </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleNavigateToEditProfile}>
+          <Avatar /> Edit Profile
+        </MenuItem>
+        <MenuItem onClick={handleNavigateToRequestsToMe}>
+          <Avatar /> Requests To Me
+        </MenuItem>
+        <Divider />
+
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />

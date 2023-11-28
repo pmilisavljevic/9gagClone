@@ -1,17 +1,23 @@
 .request-component {
-  //   height: 150px;
-  margin-top: 20px;
-  padding-inline: 10px;
-  padding-block: 5px;
+  width: 100%;
+  margin-block: 20px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   //   background-color: red;
-  border: 2px solid rgb(112, 112, 112);
+  border: 1px solid rgb(112, 112, 112);
   border-radius: 30px;
   &__avatar {
     height: 25px;
     width: 25px;
     border-radius: 50%;
+  }
+  &__btns {
+    display: flex;
+    gap: 5px;
+  }
+  &__btn {
+    @include btn;
   }
 }

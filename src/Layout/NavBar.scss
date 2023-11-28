@@ -35,6 +35,7 @@
       font-weight: 700;
     }
     &__post {
+      @include btn;
       display: flex;
       gap: 5px;
       text-decoration: none;
