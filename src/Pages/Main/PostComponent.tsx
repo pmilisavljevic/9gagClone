@@ -31,6 +31,8 @@ const PostComponent = ({
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const userInfoData = useSelector(userInfo);
+  const stateUserId = userInfoData ? userInfoData.id : null;
 
   const handleReaction = (postId: number, reactionType: "like" | "dislike") => {
     if (token) {
@@ -57,8 +59,7 @@ const PostComponent = ({
     day: "numeric",
   });
 
-  const userInfoData = useSelector(userInfo);
-  const stateUserId = userInfoData ? userInfoData.id : null;
+  
 
   return (
     <div className={` ${className} `}>
