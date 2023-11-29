@@ -114,6 +114,7 @@ export default App;
 
 TODO
 da li moze user da lajkuje svoje postove?
+da li moze endpoint za brisanje posta?
 
 srediti css, staviti klase na material elemente DONEish
 objediniti sve buttone DONE
@@ -123,8 +124,13 @@ prijateljstva DONE(moram da refreshujem nakon accept da bi request nestao)
 jedna funkcija za like/dislike DONE
 ako neulogovani pokusa da lajkuje ili doda prijatelja, redirect na login i toastify da se uloguje DONE 
 redirekcije DONE
-toastify!!!
-@media!!!
-srediti hendlovanje errora i loadinga!!!
+srediti hendlovanje errora i loadinga DONE
+
+toastify
+@media
+button da bude komponenta
+sidebar - zaboravio sam sta smo se dogovorili
+novi page - moji zahtevi i brisanje
+unfriend?
 paginacija
 */

@@ -187,14 +187,22 @@ function fuck(builder: ActionReducerMapBuilder<InitialPostType>) {
     state.myPosts = action.payload;
     state.loading = false;
   });
-  builder.addCase(fetchFriendPosts.fulfilled, (state, action) => {
-    state.friendPosts = action.payload;
-    state.loading = false;
-  });
-  builder.addCase(fetchFriendLikedPosts.fulfilled, (state, action) => {
-    state.likedByFriendPosts = action.payload;
-    state.loading = false;
-  });
+  builder
+    .addCase(fetchFriendPosts.fulfilled, (state, action) => {
+      state.friendPosts = action.payload;
+      state.loading = false;
+    })
+    .addCase(fetchFriendPosts.pending, (state) => {
+      state.loading = true;
+    });
+  builder
+    .addCase(fetchFriendLikedPosts.fulfilled, (state, action) => {
+      state.likedByFriendPosts = action.payload;
+      state.loading = false;
+    })
+    .addCase(fetchFriendLikedPosts.pending, (state) => {
+      state.loading = true;
+    });
 }
 
 export default postsSlice.reducer;

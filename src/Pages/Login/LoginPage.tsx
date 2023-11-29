@@ -63,77 +63,71 @@ function LoginPage() {
   });
 
   return (
-    <>
-      <div>
-        <Container component="main" maxWidth="lg">
-          <Box
-            sx={{
-              mt: 5,
-              mb: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
+    <Container component="main" maxWidth="lg">
+      <Box
+        sx={{
+          mt: 5,
+          mb: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          Log In
+        </Typography>
+        {loading && <CircularProgress sx={{ mt: 2 }} />}
+
+        <Box
+          component="form"
+          onSubmit={formik.handleSubmit}
+          sx={{
+            width: 400,
+            mt: 3,
+            mb: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            fullWidth
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+
+          <Button
+            color="primary"
+            variant="contained"
+            fullWidth
+            type="submit"
+            sx={{ borderRadius: 4, backgroundColor: "rgb(87, 87, 221)" }}
           >
-            <Typography component="h1" variant="h5">
-              Log In
-            </Typography>
-            {loading && <CircularProgress sx={{ mt: 2 }} />}
-
-            <Box
-              component="form"
-              onSubmit={formik.handleSubmit}
-              sx={{
-                width: 400,
-                mt: 3,
-                mb: 4,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 2,
-              }}
-            >
-              <TextField
-                fullWidth
-                id="email"
-                name="email"
-                label="Email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-              />
-              <TextField
-                fullWidth
-                id="password"
-                name="password"
-                label="Password"
-                type="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={
-                  formik.touched.password && Boolean(formik.errors.password)
-                }
-                helperText={formik.touched.password && formik.errors.password}
-              />
-
-              <Button
-                color="primary"
-                variant="contained"
-                fullWidth
-                type="submit"
-                sx={{ borderRadius: 4, backgroundColor: "rgb(87, 87, 221)" }}
-              >
-                Submit
-              </Button>
-              {error && <Alert severity="error">{error}</Alert>}
-            </Box>
-          </Box>
-        </Container>
-      </div>
-    </>
+            Submit
+          </Button>
+          {error && <Alert severity="error">{error}</Alert>}
+        </Box>
+      </Box>
+    </Container>
   );
 }
 

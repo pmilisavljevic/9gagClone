@@ -8,7 +8,7 @@
 
   &__title {
     font-size: 24px;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     text-decoration: none;
     font-weight: 600;
     color: black;
@@ -24,7 +24,7 @@
   &__content {
     font-size: 18px;
     color: #666;
-    margin-block: 10px;
+    margin-block: 5px;
   }
 
   &__img-wrap {
@@ -35,7 +35,7 @@
 
   &__img {
     max-width: 100%;
-    max-height: 500px;
+    max-height: 400px;
     height: auto;
     display: block;
     margin-inline: auto;
@@ -61,12 +61,12 @@
   &__friend {
     &__user {
       background-color: rgb(158, 75, 75);
-      font-size: 14px;
+      // font-size: 14px;
       padding: 2px 5px;
       border-radius: 10px;
     }
     &__friend {
-      font-size: 14px;
+      font-size: 12px;
       background-color: rgba(81, 143, 52, 0.808);
       padding: 2px 5px;
       border-radius: 10px;
@@ -74,6 +74,7 @@
     button {
       @include btn;
       padding: 4px 8px;
+      font-size: 12px;
     }
   }
 
