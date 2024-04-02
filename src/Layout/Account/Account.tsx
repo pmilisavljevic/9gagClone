@@ -36,21 +36,11 @@ export default function AccountMenu() {
     navigate("/");
   }
 
-  function handleNavigateToEditProfile() {
+  const handleNavigate = (route: string) => {
     setAnchorEl(null);
-    navigate("/edit-profile");
-  }
+    navigate(route);
+  };
 
-  function handleNavigateToRequestsToMe() {
-    navigate("/requests-to-me");
-  }
-
-  function handleNavigateToMyPosts() {
-    navigate("/my-posts");
-  }
-  function handleNavigateToMyFriends() {
-    navigate("/my-friends");
-  }
   const user = useSelector(userInfo);
   const dispatch = useDispatch();
   const avatar = `${URL}${user?.profilePictureUrl}`;
@@ -107,23 +97,23 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleNavigateToMyPosts}>
+        <MenuItem onClick={() => handleNavigate("/my-posts")}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           My Posts
         </MenuItem>
-        <MenuItem onClick={handleNavigateToMyFriends}>
+        <MenuItem onClick={() => handleNavigate("/my-friends")}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           My Friends
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleNavigateToEditProfile}>
+        <MenuItem onClick={() => handleNavigate("/edit-profile")}>
           <Avatar /> Edit Profile
         </MenuItem>
-        <MenuItem onClick={handleNavigateToRequestsToMe}>
+        <MenuItem onClick={() => handleNavigate("/requests-to-me")}>
           <Avatar /> Requests To Me
         </MenuItem>
         <Divider />

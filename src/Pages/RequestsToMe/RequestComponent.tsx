@@ -1,31 +1,33 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { URL } from "src/helpers/constantsAndEnums";
-import {
-  acceptFriendRequestAxios,
-  declineFriendRequestAxios,
-} from "src/services/client";
+import { FriendRequestAxios } from "src/services/client";
+import { AppDispatch } from "src/store/store";
 import { friendRequest } from "src/store/types";
-
+import { fetchFriendRequests } from "src/store/userSlice";
+import { formatDate } from "src/utils/dateFormat";
 type Props = {
   request: friendRequest;
 };
 
 function RequestComponent({ request }: Props) {
-  const dateString = request.requestDate;
-  const date = new Date(dateString);
-
-  const readableDate = date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
   const avatar = `${URL}${request.requester.profilePictureUrl}`;
   const requestId = request.id;
-  async function handleAcceptRequest(requestId: number) {
-    await acceptFriendRequestAxios(requestId);
-  }
-  async function handleDeclineRequest(requestId: number) {
-    await declineFriendRequestAxios(requestId);
+  async function handleRequest(
+    requestId: number,
+    reaction: "accept" | "decline"
+  ) {
+    try {
+      setLoading(true);
+      await FriendRequestAxios(requestId, reaction);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(fetchFriendRequests());
+      setLoading(false);
+    }
   }
 
   return (
@@ -37,17 +39,17 @@ function RequestComponent({ request }: Props) {
           {request.requester.lastName}
         </p>
       </div>
-      <p> {readableDate}</p>
+      <p> {formatDate(request.requestDate)}</p>
       <div className="request-component__btns">
         <button
           className="request-component__btn"
-          onClick={() => handleAcceptRequest(requestId)}
+          onClick={() => handleRequest(requestId, "accept")}
         >
           Accept
         </button>
         <button
           className="request-component__btn"
-          onClick={() => handleDeclineRequest(requestId)}
+          onClick={() => handleRequest(requestId, "decline")}
         >
           Decline
         </button>

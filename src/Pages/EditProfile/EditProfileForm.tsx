@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { PictureDto, UpdateProfilePayload } from "src/services/client";
+import { PictureDto, UpdateProfilePayload } from "src/services/types";
 import { Box, Button, TextField } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
@@ -7,16 +7,18 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "src/store/store";
 import { editProfile, uploadAvatar } from "src/store/userSlice";
 import ClearIcon from "@mui/icons-material/Clear";
+import { URL } from "src/helpers/constantsAndEnums";
 
 function EditProfileForm() {
   const localUser = JSON.parse(localStorage.getItem("User") || "");
+  const avatar = `${URL}${localUser?.profilePictureUrl}`;
   const [profileUpdate, setProfileUpdate] = useState<UpdateProfilePayload>({
     firstName: localUser?.firstName || "",
     lastName: localUser?.lastName || "",
   });
   const [image, setImage] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  //   console.log(image);
+  const [preview, setPreview] = useState<string | null>(avatar);
+  console.log(preview);
 
   const dispatch = useDispatch<AppDispatch>();
 

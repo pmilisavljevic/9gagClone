@@ -1,6 +1,4 @@
 import {
-  EditProfileDto,
-  PictureDto,
   addFriendAxios,
   fetchFriendRequestsAxios,
   fetchMyFriendsAxios,
@@ -9,8 +7,9 @@ import {
   updateEditedProfile,
   uploadPicture,
 } from "src/services/client";
+import { EditProfileDto, PictureDto, UserLoginDto } from "src/services/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { UserLoginDto } from "src/services/client";
+
 // import axios from "axios";
 import { RootState } from "./store";
 import { InitialUserState, UserType } from "src/store/types";
@@ -20,10 +19,20 @@ const initialState: InitialUserState = {
     ? (JSON.parse(localStorage.getItem("User") || "") as UserType)
     : null,
   token: localStorage.getItem("token") ? localStorage.getItem("token") : null,
-  loading: false,
-  error: "",
+  getTokenLoading: false,
+  getTokenError: null,
+  fetchUserInfoLoading: false,
+  fetchUserInfoError: null,
+  uploadAvatarLoading: false,
+  uploadAvatarError: null,
+  editProfileLoading: false,
+  editProfileError: null,
   friendRequests: [],
+  fetchFriendRequestsLoading: false,
+  fetchFriendRequestsError: null,
   myFriends: [],
+  fetchMyFriendsLoading: false,
+  fetchMyFriendsError: null,
 };
 
 export const getToken = createAsyncThunk(
@@ -46,7 +55,7 @@ export const fetchUserInfo = createAsyncThunk(
 );
 
 export const uploadAvatar = createAsyncThunk(
-  "user / UploadAvatar",
+  "user / uploadAvatar",
   async (image: PictureDto) => {
     const response = await uploadPicture(image);
     console.log(response);
@@ -55,7 +64,7 @@ export const uploadAvatar = createAsyncThunk(
 );
 
 export const editProfile = createAsyncThunk(
-  "user / EditProfile ",
+  "user / editProfile ",
   async (payload: EditProfileDto) => {
     const response = await updateEditedProfile(payload);
     return response.data;
@@ -93,7 +102,6 @@ const userSlice = createSlice({
     logout: (state) => {
       state.token = null;
       state.user = null;
-      state.error = "";
 
       localStorage.removeItem("token");
       localStorage.removeItem("User");
@@ -101,36 +109,40 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
-      .addCase(getToken.pending, (state) => {
-        state.loading = true;
-      })
-
-      .addCase(getToken.rejected, (state) => {
-        state.loading = false;
-        state.error = "Failed to authenticate, please try again";
-      })
-
       .addCase(getToken.fulfilled, (state, action) => {
         state.token = action.payload;
         localStorage.setItem("token", action.payload);
-        state.loading = false;
+        state.getTokenLoading = false;
       })
-
-      .addCase(fetchUserInfo.pending, (state) => {
-        state.loading = true;
+      .addCase(getToken.pending, (state) => {
+        state.getTokenLoading = true;
       })
+      .addCase(getToken.rejected, (state) => {
+        state.getTokenLoading = false;
+        state.getTokenError = "Failed to authenticate, please try again";
+      });
 
+    builder
       .addCase(fetchUserInfo.fulfilled, (state, action) => {
         localStorage.setItem("User", JSON.stringify(action.payload));
         state.user = action.payload;
-        state.loading = false;
-        // state.error = "";
+        state.fetchUserInfoLoading = false;
+      })
+      .addCase(fetchUserInfo.pending, (state) => {
+        state.fetchUserInfoLoading = true;
       })
       .addCase(fetchUserInfo.rejected, (state) => {
-        state.loading = false;
-        // state.error = "Failed to get user info";
-      })
+        state.fetchUserInfoLoading = false;
+        // state.fetchUserInfoError = "Failed to get user info";
+
+        state.token = null;
+        state.user = null;
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("User");
+      });
+
+    builder
       .addCase(uploadAvatar.fulfilled, (state, action) => {
         if (state.user) {
           state.user.profilePictureUrl = action.payload;
@@ -141,17 +153,55 @@ const userSlice = createSlice({
           data.profilePictureUrl = action.payload;
           localStorage.setItem("User", JSON.stringify(data));
         }
+        state.uploadAvatarLoading = false;
       })
+      .addCase(uploadAvatar.pending, (state) => {
+        state.uploadAvatarLoading = true;
+      })
+      .addCase(uploadAvatar.rejected, (state) => {
+        state.uploadAvatarError = "Failed to upload avatar";
+        state.uploadAvatarLoading = false;
+      });
+
+    builder
       .addCase(editProfile.fulfilled, (state, action) => {
         state.user = action.payload;
         localStorage.setItem("User", JSON.stringify(action.payload));
+        state.editProfileLoading = false;
+      })
+      .addCase(editProfile.pending, (state) => {
+        state.editProfileLoading = true;
+      })
+      .addCase(editProfile.rejected, (state) => {
+        state.editProfileError = "Failed to update profile";
+        state.editProfileLoading = false;
       });
-    builder.addCase(fetchFriendRequests.fulfilled, (state, action) => {
-      state.friendRequests = action.payload;
-    });
-    builder.addCase(fetchMyFriends.fulfilled, (state, action) => {
-      state.myFriends = action.payload;
-    });
+
+    builder
+      .addCase(fetchFriendRequests.fulfilled, (state, action) => {
+        state.friendRequests = action.payload;
+        state.fetchFriendRequestsLoading = false;
+      })
+      .addCase(fetchFriendRequests.pending, (state) => {
+        state.fetchFriendRequestsLoading = true;
+      })
+      .addCase(fetchFriendRequests.rejected, (state) => {
+        state.fetchFriendRequestsLoading = false;
+        state.fetchFriendRequestsError = "Failed to get friend requests";
+      });
+
+    builder
+      .addCase(fetchMyFriends.fulfilled, (state, action) => {
+        state.fetchMyFriendsLoading = false;
+        state.myFriends = action.payload;
+      })
+      .addCase(fetchMyFriends.pending, (state) => {
+        state.fetchMyFriendsLoading = true;
+      })
+      .addCase(fetchMyFriends.rejected, (state) => {
+        state.fetchMyFriendsError = "Failed to get my friends list";
+        state.fetchMyFriendsLoading = false;
+      });
   },
 });
 

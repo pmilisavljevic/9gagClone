@@ -1,12 +1,13 @@
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { Link, useNavigate } from "react-router-dom";
-import { URL } from "src/helpers/constantsAndEnums";
+import { ReactionType, URL } from "src/helpers/constantsAndEnums";
 import { Post } from "src/store/types";
 import { AppDispatch } from "src/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { handlePostReaction } from "src/store/postsSlice";
 import { addFriend, userInfo } from "src/store/userSlice";
+import { formatDate } from "src/utils/dateFormat";
 
 type Props = {
   post: Post;
@@ -50,17 +51,6 @@ const PostComponent = ({
     }
   }
 
-  const dateString = createdAt;
-  const date = new Date(dateString);
-
-  const readableDate = date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
-  
-
   return (
     <div className={` ${className} `}>
       <div className="post">
@@ -94,12 +84,12 @@ const PostComponent = ({
             </div>
           </div>
 
-          <p className="post__date">{readableDate}</p>
+          <p className="post__date">{formatDate(createdAt)}</p>
           <div className="post__likes flex">
             <span onClick={() => handleReaction(id, "like")}>
               <ThumbUpIcon
                 className={`post__tup  ${
-                  userReaction === 1 ? `post__tup-clicked` : ""
+                  userReaction === ReactionType.Like ? `post__tup-clicked` : ""
                 }`}
               />
               <p>{likesCount}</p>
@@ -107,7 +97,9 @@ const PostComponent = ({
             <span onClick={() => handleReaction(id, "dislike")}>
               <ThumbDownIcon
                 className={`post__tdown  ${
-                  userReaction === 2 ? `post__tdown-clicked` : ""
+                  userReaction === ReactionType.Dislike
+                    ? `post__tdown-clicked`
+                    : ""
                 }`}
               />
               <p>{dislikesCount}</p>

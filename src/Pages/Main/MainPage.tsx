@@ -6,25 +6,34 @@ import { AppDispatch } from "src/store/store";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import PostComponent from "src/Pages/Main/PostComponent";
+import { fetchUserInfo } from "src/store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function MainPage() {
   const dispatch = useDispatch<AppDispatch>();
-  const { posts, loading, error } = useSelector(
+  const navigate = useNavigate();
+  const { posts, fetchPostsLoading, fetchPostsError } = useSelector(
     (state: RootState) => state.posts
   );
 
+  const { fetchUserInfoError } = useSelector((state: RootState) => state.user);
+
   useEffect(() => {
     dispatch(fetchPosts());
-  }, [dispatch]);
 
-  if (error) return <div>Error: {error}</div>;
+    // Fetch user info and handle unauthorized error
+    dispatch(fetchUserInfo());
+  }, [dispatch, navigate]);
+
+  if (fetchPostsError) return <div>Error: {fetchPostsError}</div>;
   return (
     <div className="main-page__container">
-      {loading && (
+      {fetchPostsLoading && (
         <div className="loading">
           <CircularProgress />
         </div>
       )}
+      {fetchUserInfoError && <p>{fetchUserInfoError}</p>}
       {posts.map((post) => (
         <PostComponent key={post.id} post={post} />
       ))}

@@ -1,40 +1,13 @@
 import { axiosWithToken } from "src/helpers/axiosInstance";
-
-type UserRegisterDto = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-};
-
-export type UserLoginDto = {
-  email: string;
-  password: string;
-};
-
-export type PostDto = {
-  title: string;
-  content: string;
-  image: File | null;
-};
-
-export type UpdateProfilePayload = {
-  firstName: string;
-  lastName: string;
-};
-
-export type PictureType = {
-  image: File | null;
-};
-
-export type PictureDto = {
-  file: File | null;
-};
-
-export type EditProfileDto = {
-  firstName: string;
-  lastName: string;
-};
+import {
+  EditProfileDto,
+  PictureDto,
+  PostDto,
+  UserLoginDto,
+  UserRegisterDto,
+} from "./types";
+import { AxiosResponse } from "axios";
+import { Post } from "src/store/types";
 
 export const SignUpUser = async (payload: UserRegisterDto) => {
   return axiosWithToken.post("/Auth/Register", payload);
@@ -48,7 +21,7 @@ export const getUserInfo = async () => {
   return axiosWithToken.get("/Users/data");
 };
 
-export const getPosts = async () => {
+export const getPosts = async (): Promise<AxiosResponse<Post[]>> => {
   return axiosWithToken.get("/Posts");
 };
 
@@ -59,7 +32,9 @@ export const getFriendLikedPostsAxios = async (userId: number) => {
   return axiosWithToken.get(`/Posts/liked-by-friend/${userId}`);
 };
 
-export const getSinglePost = async (postId: number) => {
+export const getSinglePost = async (
+  postId: number
+): Promise<AxiosResponse<Post>> => {
   return axiosWithToken.get(`/Posts/${postId}`);
 };
 
@@ -99,11 +74,11 @@ export const fetchFriendRequestsAxios = async () => {
   return axiosWithToken.get("/Users/get-my-friend-requests");
 };
 
-export const acceptFriendRequestAxios = async (requestId: number) => {
-  return axiosWithToken.post(`/Users/accept-friend-request/${requestId}`);
-};
-export const declineFriendRequestAxios = async (requestId: number) => {
-  return axiosWithToken.post(`/Users/decline-friend-request/${requestId}`);
+export const FriendRequestAxios = async (
+  requestId: number,
+  reaction: string
+) => {
+  return axiosWithToken.post(`/Users/${reaction}-friend-request/${requestId}`);
 };
 
 export const fetchMyFriendsAxios = async () => {

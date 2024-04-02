@@ -41,6 +41,20 @@ function LoginPage() {
   const error = useSelector(userError);
   const loading = useSelector(userStatus);
 
+  async function login(values: { email: string; password: string }) {
+    try {
+      const data = await dispatch(getToken(values));
+      console.log(data);
+      if (data.meta.requestStatus === "rejected") {
+        return;
+      }
+      await dispatch(fetchUserInfo());
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -48,17 +62,7 @@ function LoginPage() {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      try {
-        const data = await dispatch(getToken(values));
-        console.log(data);
-        if (data.meta.requestStatus === "rejected") {
-          return;
-        }
-        await dispatch(fetchUserInfo());
-        navigate("/");
-      } catch (e) {
-        console.log(e);
-      }
+      login(values);
     },
   });
 

@@ -110,47 +110,19 @@ export default App;
 
 /*
 
-
-
 TODO
 
-da li moze endpoint za brisanje posta?
-
-srediti css, staviti klase na material elemente DONEish
-objediniti sve buttone DONE
-kako da izgleda pojedinacan post? DONE
-protected routes za guesta DONE
-prijateljstva DONE(moram da refreshujem nakon accept da bi request nestao) REFETCH ILI FILTER STATE-A
-jedna funkcija za like/dislike DONE
-ako neulogovani pokusa da lajkuje ili doda prijatelja, redirect na login i toastify da se uloguje DONE 
-redirekcije DONE
-srediti hendlovanje errora i loadinga DONE
-
-toastify
 @media
 button da bude komponenta
 sidebar - isto kao Account
 novi page - moji zahtevi i brisanje!!!!!
-unfriend?
+unfriend!!!!!
 paginacija
 
-
-uvek da se fetchuje user na svakoj stranici (getUserInfo),a ko 401 da ide u logout
-da moze da se lajkuje na single postu
-moze user da lajkuje svoj post
-trentna slika u edit profile da se prkazuje, staviti placeholder kao default img
-objediniti funkcije za navikagicju u Account
 napraviti folder components sa komponentama (input)
 sortirati const-ove i importe
-userReaction === staviti u enum
-loginpage - logika da ide u posebnu funkciju, gore
-za svaki fetch Thnuk da idu sva 3 case-a
-handlePostReaction - handle za -1 index]\
 validacije za novi post za sva 3 input
-moment.js za DATUME ili datefns, staviti u ultis ili helpers
-RewuestComponent - srediti funkcije, try/catch ako postoji response
-dto iz Clint.ts u poseban fajl
-napraviti loading i error za svaki request i nazvati ih odgovarajuce
-variable i funkcije scss
-dynamically declare variables scss
+return type za axios JOS KOJI MOZE
+handlePostReaction - handle za -1 index]\ DONE?
+
 */

@@ -8,9 +8,8 @@ import { AppDispatch, RootState } from "src/store/store";
 
 function PostPage() {
   const dispatch = useDispatch<AppDispatch>();
-  const { singlePost, loading, error } = useSelector(
-    (state: RootState) => state.posts
-  );
+  const { singlePost, fetchSinglePostLoading, fetchSinglePostError } =
+    useSelector((state: RootState) => state.posts);
 
   const { id } = useParams();
 
@@ -21,8 +20,8 @@ function PostPage() {
     }
   }, [dispatch, id]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (fetchSinglePostLoading) return <div>Loading...</div>;
+  if (fetchSinglePostError) return <div>Error: {fetchSinglePostError}</div>;
 
   return (
     <div>
