@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import PostComponent from "src/Pages/Main/PostComponent";
+import PostComponent from "src/components/Post/PostComponent";
 import { fetchSinglePost } from "src/store/postsSlice";
 import { AppDispatch, RootState } from "src/store/store";
 

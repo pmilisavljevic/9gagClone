@@ -5,9 +5,10 @@ import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import { submitPost } from "src/store/postsSlice";
 import { AppDispatch } from "src/store/store";
-import { PostDto } from "src/services/client";
+
 import { useNavigate } from "react-router-dom";
 import ClearIcon from "@mui/icons-material/Clear";
+import { PostDto } from "src/services/types";
 
 export default function PostForm() {
   const [title, setTitle] = useState<string>("");

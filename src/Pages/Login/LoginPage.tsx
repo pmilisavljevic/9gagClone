@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-// import { LogInUser } from "src/services/client";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -21,8 +20,6 @@ import {
 } from "src/store/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "src/store/store";
-// import { getUserInfo } from "src/services/client";
-// import { toast } from "react-toastify";
 
 const validationSchema = yup.object({
   email: yup

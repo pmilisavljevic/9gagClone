@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import CreateIcon from "@mui/icons-material/Create";
 import Logo from "src/Layout/Logo/Logo";
 import Menu from "src/Layout/Menu/Menu";
-import AccountMenu from "./Account/Account";
+import AccountMenu from "../Account/Account";
 import { useSelector } from "react-redux";
 import { userInfo } from "src/store/userSlice";
 

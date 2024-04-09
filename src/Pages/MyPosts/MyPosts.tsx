@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMyPosts } from "src/store/postsSlice";
 import { AppDispatch, RootState } from "src/store/store";
 import { userInfo } from "src/store/userSlice";
-import PostComponent from "src/Pages/Main/PostComponent";
+import PostComponent from "src/components/Post/PostComponent";
 
 import Loading from "src/components/Loading";
 

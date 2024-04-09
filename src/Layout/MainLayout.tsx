@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import NavBar from "./NavBar";
+import NavBar from "./NavBar/NavBar";
 
 type Props = PropsWithChildren;
 

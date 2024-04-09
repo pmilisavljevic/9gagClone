@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "src/store/store";
 import { useEffect } from "react";
 import { fetchFriendLikedPosts } from "src/store/postsSlice";
-import PostComponent from "../Main/PostComponent";
+import PostComponent from "../../components/Post/PostComponent";
 import { CircularProgress } from "@mui/material";
 
 export default function PostsLikedByFriend() {

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "src/store/store";
 import { fetchFriendPosts } from "src/store/postsSlice";
-import PostComponent from "../Main/PostComponent";
+import PostComponent from "../../components/Post/PostComponent";
 
 import Loading from "src/components/Loading";
 

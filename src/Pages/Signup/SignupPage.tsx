@@ -1,7 +1,4 @@
-// import { useNavigate } from "react-router-dom";
 import { SignUpUser } from "src/services/client";
-
-// import { registerUser } from "../../services/client";
 
 import { useFormik } from "formik";
 import * as yup from "yup";

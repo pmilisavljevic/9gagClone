@@ -4,7 +4,7 @@ import { fetchPosts } from "src/store/postsSlice";
 import { RootState } from "src/store/store";
 import { AppDispatch } from "src/store/store";
 
-import PostComponent from "src/Pages/Main/PostComponent";
+import PostComponent from "src/components/Post/PostComponent";
 import { fetchUserInfo } from "src/store/userSlice";
 import { useNavigate } from "react-router-dom";
 import Loading from "src/components/Loading";

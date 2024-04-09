@@ -1,4 +1,4 @@
-import PostForm from "src/Pages/NewPost/PostForm";
+import PostForm from "src/Pages/NewPost/NewPostComponent/PostForm";
 
 export default function NewPost() {
   return (

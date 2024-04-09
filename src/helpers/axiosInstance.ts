@@ -1,7 +1,8 @@
 import axios from "axios";
+import { URL } from "./constantsAndEnums";
 
 export const axiosWithToken = axios.create({
-  baseURL: "http://161.97.83.162:777",
+  baseURL: URL,
 });
 
 axiosWithToken.interceptors.request.use(
