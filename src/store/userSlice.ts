@@ -33,6 +33,8 @@ const initialState: InitialUserState = {
   myFriends: [],
   fetchMyFriendsLoading: false,
   fetchMyFriendsError: null,
+  loading: false,
+  error: null,
 };
 
 export const getToken = createAsyncThunk(

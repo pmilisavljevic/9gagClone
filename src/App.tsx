@@ -19,7 +19,7 @@ import PostsByFriend from "./Pages/PostsByFriend/PostsByFriend";
 import PostsLikedByFriend from "./Pages/PostsLikedByFriend/PostsLikedByFriend";
 import ProtectedRouteGuest from "./utils/ProtectedRouteGuest";
 
-function App() {
+export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -106,22 +106,16 @@ function App() {
     </Provider>
   );
 }
-export default App;
 
 /*
 
 TODO
 
-@media
-button da bude komponenta
-sidebar - isto kao Account
-novi page - moji zahtevi i brisanje!!!!!
-unfriend!!!!!
-paginacija
+
 
 napraviti folder components sa komponentama (input)
 sortirati const-ove i importe
-validacije za novi post za sva 3 input
+
 return type za axios JOS KOJI MOZE
 handlePostReaction - handle za -1 index]\ DONE?
 

@@ -73,4 +73,6 @@ export type InitialUserState = {
   fetchMyFriendsError: string | null;
   friendRequests: friendRequest[];
   myFriends: UserType[];
+  loading: boolean;
+  error: string | null;
 };

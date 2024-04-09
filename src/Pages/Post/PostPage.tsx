@@ -6,7 +6,7 @@ import PostComponent from "src/Pages/Main/PostComponent";
 import { fetchSinglePost } from "src/store/postsSlice";
 import { AppDispatch, RootState } from "src/store/store";
 
-function PostPage() {
+export default function PostPage() {
   const dispatch = useDispatch<AppDispatch>();
   const { singlePost, fetchSinglePostLoading, fetchSinglePostError } =
     useSelector((state: RootState) => state.posts);
@@ -35,5 +35,3 @@ function PostPage() {
     </div>
   );
 }
-
-export default PostPage;

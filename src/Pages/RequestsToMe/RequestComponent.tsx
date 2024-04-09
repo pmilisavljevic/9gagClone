@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Loading from "src/components/Loading";
 import { URL } from "src/helpers/constantsAndEnums";
 import { FriendRequestAxios } from "src/services/client";
 import { AppDispatch } from "src/store/store";
@@ -10,15 +11,16 @@ type Props = {
   request: friendRequest;
 };
 
-function RequestComponent({ request }: Props) {
+export default function RequestComponent({ request }: Props) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const avatar = `${URL}${request.requester.profilePictureUrl}`;
   const requestId = request.id;
-  async function handleRequest(
+
+  const handleRequest = async (
     requestId: number,
     reaction: "accept" | "decline"
-  ) {
+  ) => {
     try {
       setLoading(true);
       await FriendRequestAxios(requestId, reaction);
@@ -28,10 +30,11 @@ function RequestComponent({ request }: Props) {
       dispatch(fetchFriendRequests());
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="request-component">
+      {loading && <Loading />}
       <div className="flex">
         <img className="request-component__avatar" src={avatar}></img>
         <p>
@@ -57,5 +60,3 @@ function RequestComponent({ request }: Props) {
     </div>
   );
 }
-
-export default RequestComponent;

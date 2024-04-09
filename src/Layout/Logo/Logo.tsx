@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import "src/Layout/Logo/Logo.scss";
 
-function Logo() {
+export default function Logo() {
   return (
     <Link to="/" className="logo">
       9gagClone
     </Link>
   );
 }
-
-export default Logo;

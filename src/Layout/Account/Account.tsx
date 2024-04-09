@@ -26,15 +26,16 @@ export default function AccountMenu() {
   };
 
   const navigate = useNavigate();
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  function handleLogout() {
+  const handleLogout = () => {
     setAnchorEl(null);
     dispatch(logout());
     navigate("/");
-  }
+  };
 
   const handleNavigate = (route: string) => {
     setAnchorEl(null);

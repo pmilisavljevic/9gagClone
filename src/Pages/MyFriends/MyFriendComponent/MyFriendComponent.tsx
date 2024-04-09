@@ -6,7 +6,7 @@ type Props = {
   friend: UserType;
 };
 
-function MyFriendComponent({ friend }: Props) {
+export default function MyFriendComponent({ friend }: Props) {
   const avatar = `${URL}${friend.profilePictureUrl}`;
   return (
     <div className="my-friend-component">
@@ -34,5 +34,3 @@ function MyFriendComponent({ friend }: Props) {
     </div>
   );
 }
-
-export default MyFriendComponent;

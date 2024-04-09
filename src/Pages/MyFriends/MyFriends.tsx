@@ -4,7 +4,7 @@ import MyFriendComponent from "./MyFriendComponent/MyFriendComponent";
 import { AppDispatch, RootState } from "src/store/store";
 import { fetchMyFriends } from "src/store/userSlice";
 
-function MyFriends() {
+export default function MyFriends() {
   const dispatch = useDispatch<AppDispatch>();
   const { myFriends } = useSelector((state: RootState) => state.user);
 
@@ -20,5 +20,3 @@ function MyFriends() {
     </div>
   );
 }
-
-export default MyFriends;

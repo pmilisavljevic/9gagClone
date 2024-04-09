@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from "src/store/store";
 import { fetchFriendRequests } from "src/store/userSlice";
 import RequestComponent from "./RequestComponent";
 
-function RequestsToMe() {
+export default function RequestsToMe() {
   const dispatch = useDispatch<AppDispatch>();
   const { friendRequests } = useSelector((state: RootState) => state.user);
 
@@ -22,4 +22,3 @@ function RequestsToMe() {
     </div>
   );
 }
-export default RequestsToMe;

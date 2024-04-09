@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "src/store/postsSlice";
 import { RootState } from "src/store/store";
 import { AppDispatch } from "src/store/store";
-import CircularProgress from "@mui/material/CircularProgress";
 
 import PostComponent from "src/Pages/Main/PostComponent";
 import { fetchUserInfo } from "src/store/userSlice";
 import { useNavigate } from "react-router-dom";
+import Loading from "src/components/Loading";
 
-function MainPage() {
+export default function MainPage() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { posts, fetchPostsLoading, fetchPostsError } = useSelector(
@@ -28,11 +28,7 @@ function MainPage() {
   if (fetchPostsError) return <div>Error: {fetchPostsError}</div>;
   return (
     <div className="main-page__container">
-      {fetchPostsLoading && (
-        <div className="loading">
-          <CircularProgress />
-        </div>
-      )}
+      {fetchPostsLoading && <Loading />}
       {fetchUserInfoError && <p>{fetchUserInfoError}</p>}
       {posts.map((post) => (
         <PostComponent key={post.id} post={post} />
@@ -40,5 +36,3 @@ function MainPage() {
     </div>
   );
 }
-
-export default MainPage;

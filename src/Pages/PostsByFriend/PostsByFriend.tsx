@@ -4,13 +4,14 @@ import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "src/store/store";
 import { fetchFriendPosts } from "src/store/postsSlice";
 import PostComponent from "../Main/PostComponent";
-import { CircularProgress } from "@mui/material";
 
-function PostsByFriend() {
+import Loading from "src/components/Loading";
+
+export default function PostsByFriend() {
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
 
-  const { friendPosts, loading } = useSelector(
+  const { friendPosts, fetchFriendPostsLoading } = useSelector(
     (state: RootState) => state.posts
   );
 
@@ -22,16 +23,10 @@ function PostsByFriend() {
   }, [dispatch, id]);
   return (
     <div>
-      {loading && (
-        <div className="loading">
-          <CircularProgress />
-        </div>
-      )}
+      {fetchFriendPostsLoading && <Loading />}
       {friendPosts.map((post) => (
         <PostComponent key={post.id} post={post} />
       ))}
     </div>
   );
 }
-
-export default PostsByFriend;

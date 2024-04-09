@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 
 type Props = PropsWithChildren;
 
-function MainLayout({ children }: Props) {
+export default function MainLayout({ children }: Props) {
   return (
     <div className="main-layout">
       <NavBar />
@@ -11,5 +11,3 @@ function MainLayout({ children }: Props) {
     </div>
   );
 }
-
-export default MainLayout;

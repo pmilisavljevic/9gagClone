@@ -35,13 +35,13 @@ const validationSchema = yup.object({
     .required("Password is required"),
 });
 
-function LoginPage() {
+export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const error = useSelector(userError);
   const loading = useSelector(userStatus);
 
-  async function login(values: { email: string; password: string }) {
+  const login = async (values: { email: string; password: string }) => {
     try {
       const data = await dispatch(getToken(values));
       console.log(data);
@@ -53,7 +53,7 @@ function LoginPage() {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -61,7 +61,7 @@ function LoginPage() {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       login(values);
     },
   });
@@ -134,5 +134,3 @@ function LoginPage() {
     </Container>
   );
 }
-
-export default LoginPage;

@@ -1,11 +1,9 @@
 import PostForm from "src/Pages/NewPost/PostForm";
 
-function NewPost() {
+export default function NewPost() {
   return (
     <div className="new-post">
       <PostForm />
     </div>
   );
 }
-
-export default NewPost;

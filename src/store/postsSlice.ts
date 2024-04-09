@@ -147,10 +147,10 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {},
-  extraReducers: fuck,
+  extraReducers: test,
 });
 
-function fuck(builder: ActionReducerMapBuilder<InitialPostType>) {
+function test(builder: ActionReducerMapBuilder<InitialPostType>) {
   builder
     .addCase(fetchPosts.pending, (state) => {
       state.fetchPostsLoading = true;

@@ -43,13 +43,13 @@ const PostComponent = ({
     }
   };
 
-  function handleAddFriend(userId: number) {
+  const handleAddFriend = (userId: number) => {
     if (token) {
       dispatch(addFriend(userId));
     } else {
       navigate("/login");
     }
-  }
+  };
 
   return (
     <div className={` ${className} `}>

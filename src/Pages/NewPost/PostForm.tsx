@@ -9,7 +9,7 @@ import { PostDto } from "src/services/client";
 import { useNavigate } from "react-router-dom";
 import ClearIcon from "@mui/icons-material/Clear";
 
-function PostForm() {
+export default function PostForm() {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
@@ -131,5 +131,3 @@ function PostForm() {
     </Box>
   );
 }
-
-export default PostForm;

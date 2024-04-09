@@ -1,11 +1,9 @@
 import EditProfileForm from "./EditProfileForm";
 
-function EditProfile() {
+export default function EditProfile() {
   return (
     <div className="edit-profile">
       <EditProfileForm />
     </div>
   );
 }
-
-export default EditProfile;

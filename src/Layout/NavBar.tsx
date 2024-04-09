@@ -6,7 +6,7 @@ import AccountMenu from "./Account/Account";
 import { useSelector } from "react-redux";
 import { userInfo } from "src/store/userSlice";
 
-function NavBar() {
+export default function NavBar() {
   const user = useSelector(userInfo);
   return (
     <nav className="nav-bar">
@@ -39,5 +39,3 @@ function NavBar() {
     </nav>
   );
 }
-
-export default NavBar;

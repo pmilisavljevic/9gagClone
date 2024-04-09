@@ -6,10 +6,10 @@ import { fetchFriendLikedPosts } from "src/store/postsSlice";
 import PostComponent from "../Main/PostComponent";
 import { CircularProgress } from "@mui/material";
 
-function PostsLikedByFriend() {
+export default function PostsLikedByFriend() {
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
-  const { likedByFriendPosts, loading } = useSelector(
+  const { likedByFriendPosts, fetchFriendLikedPostsLoading } = useSelector(
     (state: RootState) => state.posts
   );
   useEffect(() => {
@@ -20,7 +20,7 @@ function PostsLikedByFriend() {
   }, [dispatch, id]);
   return (
     <div>
-      {loading && (
+      {fetchFriendLikedPostsLoading && (
         <div className="loading">
           <CircularProgress />
         </div>
@@ -31,5 +31,3 @@ function PostsLikedByFriend() {
     </div>
   );
 }
-
-export default PostsLikedByFriend;

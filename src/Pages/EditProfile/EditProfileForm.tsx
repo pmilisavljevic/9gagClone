@@ -9,7 +9,7 @@ import { editProfile, uploadAvatar } from "src/store/userSlice";
 import ClearIcon from "@mui/icons-material/Clear";
 import { URL } from "src/helpers/constantsAndEnums";
 
-function EditProfileForm() {
+export default function EditProfileForm() {
   const localUser = JSON.parse(localStorage.getItem("User") || "");
   const avatar = `${URL}${localUser?.profilePictureUrl}`;
   const [profileUpdate, setProfileUpdate] = useState<UpdateProfilePayload>({
@@ -154,5 +154,3 @@ function EditProfileForm() {
     </>
   );
 }
-
-export default EditProfileForm;

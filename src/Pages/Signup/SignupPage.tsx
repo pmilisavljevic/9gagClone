@@ -30,7 +30,7 @@ const validationSchema = yup.object({
     .required("Password is required"),
 });
 
-function SignupPage() {
+export default function SignupPage() {
   const navigate = useNavigate();
 
   const registerUserFunction = async (values: FormikType) => {
@@ -154,5 +154,3 @@ function SignupPage() {
     </div>
   );
 }
-
-export default SignupPage;
