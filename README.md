@@ -1,27 +1,32 @@
-# React + TypeScript + Vite
+# 9gagClone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalistic practice clone of the popular social media platform 9gag, built using React in frontend and ASP.NET in backend.
 
-Currently, two official plugins are available:
+NOTE: As of April 1st 2024 the backend URL has stopped responding, probably due to expired hosting. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## Expanding the ESLint configuration
+This was my second project during the internship at MarbleIT. The main idea behind this project was building a real-world React app with a realistic backend (including RESTful API, database interactions) to practice concepts like API handling, authorization, and troubleshooting various server errors.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Besides the default features of the original 9gag platform, such as register, login, upload picture, and react to a post, some additional features were introduced into this app, such as friend requests and displaying friends' posts.
 
-- Configure the top-level `parserOptions` property like this:
+While developing this app, I had first-time experience of using some new libraries and tools, such as TypeScript, Redux Toolkit with Thunks for state management, Axios for HTTP requests, Formik and Yup for form handling and validation, and MUI for component design.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+I tried my best to apply all the best practices of React development, such as syntax consistency, the DRY principle, separation of concerns, clear folder structure and naming conventions and import sorting and grouping.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+All credit for building the backend goes to my mentor, Rajko Culibrk.
+Github Repo for backend (https://github.com/RajkoCulibrk/9GagClone)
+
+As a junior React developer, this project offered a remarkable opportunity for professional growth. It taught me how to navigate through challenges, read extensive documentation, and collaborate effectively with colleagues, all while preparing me for future challenges in the field of professional development.
+
+## Installation
+
+Clone the repository and install dependencies:
+
+````bash
+git clone https://github.com/pmilisavljevic/9gagClone.git
+cd 9gagClone
+npm install
+npm run dev
+````
+
