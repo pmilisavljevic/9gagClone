@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import "src/Layout/Logo/Logo.scss";
 
 export default function Logo() {

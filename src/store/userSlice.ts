@@ -1,3 +1,5 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import {
   addFriendAxios,
   fetchFriendRequestsAxios,
@@ -8,11 +10,9 @@ import {
   uploadPicture,
 } from "src/services/client";
 import { EditProfileDto, PictureDto, UserLoginDto } from "src/services/types";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-// import axios from "axios";
-import { RootState } from "./store";
 import { InitialUserState, UserType } from "src/store/types";
+
+import { RootState } from "./store";
 
 const initialState: InitialUserState = {
   user: localStorage.getItem("User")
@@ -43,26 +43,25 @@ export const getToken = createAsyncThunk(
     const response = await logInUser(info);
 
     return response.data.token;
-  }
+  },
 );
 
 export const fetchUserInfo = createAsyncThunk(
   "user / fetchUserInfo",
   async () => {
     const response = await getUserInfo();
-    console.log(response.data);
 
     return response.data;
-  }
+  },
 );
 
 export const uploadAvatar = createAsyncThunk(
   "user / uploadAvatar",
   async (image: PictureDto) => {
     const response = await uploadPicture(image);
-    console.log(response);
+
     return response.data.profilePictureUrl;
-  }
+  },
 );
 
 export const editProfile = createAsyncThunk(
@@ -70,7 +69,7 @@ export const editProfile = createAsyncThunk(
   async (payload: EditProfileDto) => {
     const response = await updateEditedProfile(payload);
     return response.data;
-  }
+  },
 );
 
 export const addFriend = createAsyncThunk(
@@ -78,7 +77,7 @@ export const addFriend = createAsyncThunk(
   async (userId: number) => {
     const response = await addFriendAxios(userId);
     return response.data;
-  }
+  },
 );
 
 export const fetchFriendRequests = createAsyncThunk(
@@ -86,7 +85,7 @@ export const fetchFriendRequests = createAsyncThunk(
   async () => {
     const response = await fetchFriendRequestsAxios();
     return response.data;
-  }
+  },
 );
 
 export const fetchMyFriends = createAsyncThunk(
@@ -94,7 +93,7 @@ export const fetchMyFriends = createAsyncThunk(
   async () => {
     const response = await fetchMyFriendsAxios();
     return response.data;
-  }
+  },
 );
 
 const userSlice = createSlice({

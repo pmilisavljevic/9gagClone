@@ -40,14 +40,6 @@ export type UserType = {
   isFriendsWith: boolean;
 };
 
-// type Requestee = {
-//   id: number;
-//   firstName: string;
-//   lastName: string;
-//   email: string;
-//   profilePictureUrl: string;
-// };
-
 export type friendRequest = {
   id: number;
   requester: UserType;

@@ -1,18 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { AppDispatch, RootState } from "src/store/store";
-import { fetchFriendPosts } from "src/store/postsSlice";
-import PostComponent from "../../components/Post/PostComponent";
 
 import Loading from "src/components/Loading";
+import PostComponent from "src/components/Post/PostComponent";
+import { fetchFriendPosts } from "src/store/postsSlice";
+import { AppDispatch, RootState } from "src/store/store";
 
 export default function PostsByFriend() {
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
 
   const { friendPosts, fetchFriendPostsLoading } = useSelector(
-    (state: RootState) => state.posts
+    (state: RootState) => state.posts,
   );
 
   useEffect(() => {

@@ -1,29 +1,25 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchPosts } from "src/store/postsSlice";
-import { RootState } from "src/store/store";
-import { AppDispatch } from "src/store/store";
+import { useDispatch, useSelector } from "react-redux";
 
-import PostComponent from "src/components/Post/PostComponent";
-import { fetchUserInfo } from "src/store/userSlice";
-import { useNavigate } from "react-router-dom";
 import Loading from "src/components/Loading";
+import PostComponent from "src/components/Post/PostComponent";
+import { fetchPosts } from "src/store/postsSlice";
+import { AppDispatch, RootState } from "src/store/store";
+import { fetchUserInfo } from "src/store/userSlice";
 
 export default function MainPage() {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
+
   const { posts, fetchPostsLoading, fetchPostsError } = useSelector(
-    (state: RootState) => state.posts
+    (state: RootState) => state.posts,
   );
 
   const { fetchUserInfoError } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     dispatch(fetchPosts());
-
-    // Fetch user info and handle unauthorized error
     dispatch(fetchUserInfo());
-  }, [dispatch, navigate]);
+  }, [dispatch]);
 
   if (fetchPostsError) return <div>Error: {fetchPostsError}</div>;
   return (

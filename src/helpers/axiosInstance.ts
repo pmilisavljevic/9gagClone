@@ -1,5 +1,6 @@
 import axios from "axios";
-import { URL } from "./constantsAndEnums";
+
+import { URL } from "src/helpers/constantsAndEnums";
 
 export const axiosWithToken = axios.create({
   baseURL: URL,
@@ -8,7 +9,7 @@ export const axiosWithToken = axios.create({
 axiosWithToken.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
-    // console.log(token);
+
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
@@ -16,5 +17,5 @@ axiosWithToken.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );

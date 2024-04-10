@@ -1,11 +1,13 @@
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import { Link, useNavigate } from "react-router-dom";
-import { ReactionType, URL } from "src/helpers/constantsAndEnums";
-import { Post } from "src/store/types";
-import { AppDispatch } from "src/store/store";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+
+import { ReactionType, URL } from "src/helpers/constantsAndEnums";
 import { handlePostReaction } from "src/store/postsSlice";
+import { AppDispatch } from "src/store/store";
+import { Post } from "src/store/types";
 import { addFriend, userInfo } from "src/store/userSlice";
 import { formatDate } from "src/utils/dateFormat";
 

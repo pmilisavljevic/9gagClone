@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch, RootState } from "src/store/store";
 import { fetchFriendRequests } from "src/store/userSlice";
-import RequestComponent from "./RequestComponent";
+
+import RequestComponent from "./RequestsToMeComponent/RequestComponent";
 
 export default function RequestsToMe() {
   const dispatch = useDispatch<AppDispatch>();

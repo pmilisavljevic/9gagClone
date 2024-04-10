@@ -1,4 +1,8 @@
+import { AxiosResponse } from "axios";
+
 import { axiosWithToken } from "src/helpers/axiosInstance";
+import { Post } from "src/store/types";
+
 import {
   EditProfileDto,
   PictureDto,
@@ -6,8 +10,6 @@ import {
   UserLoginDto,
   UserRegisterDto,
 } from "./types";
-import { AxiosResponse } from "axios";
-import { Post } from "src/store/types";
 
 export const SignUpUser = async (payload: UserRegisterDto) => {
   return axiosWithToken.post("/Auth/Register", payload);
@@ -33,7 +35,7 @@ export const getFriendLikedPostsAxios = async (userId: number) => {
 };
 
 export const getSinglePost = async (
-  postId: number
+  postId: number,
 ): Promise<AxiosResponse<Post>> => {
   return axiosWithToken.get(`/Posts/${postId}`);
 };
@@ -76,7 +78,7 @@ export const fetchFriendRequestsAxios = async () => {
 
 export const FriendRequestAxios = async (
   requestId: number,
-  reaction: string
+  reaction: string,
 ) => {
   return axiosWithToken.post(`/Users/${reaction}-friend-request/${requestId}`);
 };

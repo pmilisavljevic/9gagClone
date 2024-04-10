@@ -1,14 +1,15 @@
-import { Box, Button, TextField } from "@mui/material";
-import { useState, ChangeEvent, FormEvent } from "react";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { styled } from "@mui/material/styles";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import ClearIcon from "@mui/icons-material/Clear";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { Box, Button, TextField } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+import { PostDto } from "src/services/types";
 import { submitPost } from "src/store/postsSlice";
 import { AppDispatch } from "src/store/store";
-
-import { useNavigate } from "react-router-dom";
-import ClearIcon from "@mui/icons-material/Clear";
-import { PostDto } from "src/services/types";
 
 export default function PostForm() {
   const [title, setTitle] = useState<string>("");

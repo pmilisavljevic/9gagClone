@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MyFriendComponent from "./MyFriendsComponent/MyFriendComponent";
+
 import { AppDispatch, RootState } from "src/store/store";
 import { fetchMyFriends } from "src/store/userSlice";
+
+import MyFriendComponent from "./MyFriendsComponent/MyFriendComponent";
 
 export default function MyFriends() {
   const dispatch = useDispatch<AppDispatch>();

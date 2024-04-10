@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+
 import Loading from "src/components/Loading";
 import { URL } from "src/helpers/constantsAndEnums";
 import { FriendRequestAxios } from "src/services/client";
@@ -7,6 +8,7 @@ import { AppDispatch } from "src/store/store";
 import { friendRequest } from "src/store/types";
 import { fetchFriendRequests } from "src/store/userSlice";
 import { formatDate } from "src/utils/dateFormat";
+
 type Props = {
   request: friendRequest;
 };
@@ -19,7 +21,7 @@ export default function RequestComponent({ request }: Props) {
 
   const handleRequest = async (
     requestId: number,
-    reaction: "accept" | "decline"
+    reaction: "accept" | "decline",
   ) => {
     try {
       setLoading(true);

@@ -1,13 +1,15 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { PictureDto, UpdateProfilePayload } from "src/services/types";
-import { Box, Button, TextField } from "@mui/material";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { styled } from "@mui/material/styles";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
+
+import ClearIcon from "@mui/icons-material/Clear";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { Box, Button, TextField } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+import { URL } from "src/helpers/constantsAndEnums";
+import { PictureDto, UpdateProfilePayload } from "src/services/types";
 import { AppDispatch } from "src/store/store";
 import { editProfile, uploadAvatar } from "src/store/userSlice";
-import ClearIcon from "@mui/icons-material/Clear";
-import { URL } from "src/helpers/constantsAndEnums";
 
 export default function EditProfileForm() {
   const localUser = JSON.parse(localStorage.getItem("User") || "");
@@ -50,7 +52,7 @@ export default function EditProfileForm() {
   };
 
   const handleOnChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const name = e.target.name;
     setProfileUpdate({

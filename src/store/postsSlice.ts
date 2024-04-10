@@ -1,8 +1,9 @@
 import {
-  createSlice,
-  createAsyncThunk,
   ActionReducerMapBuilder,
+  createAsyncThunk,
+  createSlice,
 } from "@reduxjs/toolkit";
+
 import {
   getFriendLikedPostsAxios,
   getPosts,
@@ -37,7 +38,6 @@ const initialState: InitialPostType = {
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const response = await getPosts();
-
   return response.data;
 });
 
@@ -50,7 +50,7 @@ export const fetchSinglePost = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 );
 export const fetchMyPosts = createAsyncThunk(
   "posts/fetchMyPosts",
@@ -61,7 +61,7 @@ export const fetchMyPosts = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 );
 
 export const submitPost = createAsyncThunk(
@@ -73,7 +73,7 @@ export const submitPost = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 );
 
 export const thumbsUpPost = createAsyncThunk(
@@ -85,7 +85,7 @@ export const thumbsUpPost = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 );
 export const thumbsDownPost = createAsyncThunk(
   "posts/thumbsDOwnPost",
@@ -96,7 +96,7 @@ export const thumbsDownPost = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 );
 
 export const handlePostReaction = createAsyncThunk(
@@ -117,7 +117,7 @@ export const handlePostReaction = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 );
 
 export const fetchFriendPosts = createAsyncThunk(
@@ -129,7 +129,7 @@ export const fetchFriendPosts = createAsyncThunk(
     } catch (error) {
       // console.log(error);
     }
-  }
+  },
 );
 export const fetchFriendLikedPosts = createAsyncThunk(
   "posts/fetchFriendLikedPosts",
@@ -140,7 +140,7 @@ export const fetchFriendLikedPosts = createAsyncThunk(
     } catch (error) {
       // console.log(error);
     }
-  }
+  },
 );
 
 const postsSlice = createSlice({
@@ -209,10 +209,8 @@ function test(builder: ActionReducerMapBuilder<InitialPostType>) {
     const { id } = action.payload;
     const postIndex = state.posts.findIndex((post) => post.id === id);
     if (postIndex !== -1) {
-      // Update the existing post if found
       state.posts[postIndex] = { ...state.posts[postIndex], ...action.payload };
     } else {
-      // Add a new post if not found
       state.posts.push(action.payload);
     }
     if (action.payload) {
@@ -221,44 +219,37 @@ function test(builder: ActionReducerMapBuilder<InitialPostType>) {
 
     const myPostIndex = state.myPosts.findIndex((post) => post.id === id);
     if (myPostIndex !== -1) {
-      // Update the existing post if found
       state.myPosts[myPostIndex] = {
         ...state.myPosts[myPostIndex],
         ...action.payload,
       };
     } else {
-      // Add a new post if not found
       state.myPosts.push(action.payload);
     }
 
     const friendPostIndex = state.friendPosts.findIndex(
-      (post) => post.id === id
+      (post) => post.id === id,
     );
     if (friendPostIndex !== -1) {
-      // Update the existing post if found
       state.friendPosts[friendPostIndex] = {
         ...state.friendPosts[friendPostIndex],
         ...action.payload,
       };
     } else {
-      // Add a new post if not found
       state.friendPosts.push(action.payload);
     }
 
     const likedByFriendPostsIndex = state.likedByFriendPosts.findIndex(
-      (post) => post.id === id
+      (post) => post.id === id,
     );
     if (likedByFriendPostsIndex !== -1) {
-      // Update the existing post if found
       state.likedByFriendPosts[likedByFriendPostsIndex] = {
         ...state.likedByFriendPosts[likedByFriendPostsIndex],
         ...action.payload,
       };
     } else {
-      // Add a new post if not found
       state.posts.push(action.payload);
     }
-    // OVDE OBOJITI SVE STATE-OVE SA RESPONSOM
   });
 
   builder

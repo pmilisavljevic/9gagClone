@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import Loading from "src/components/Loading";
+import PostComponent from "src/components/Post/PostComponent";
 import { fetchMyPosts } from "src/store/postsSlice";
 import { AppDispatch, RootState } from "src/store/store";
 import { userInfo } from "src/store/userSlice";
-import PostComponent from "src/components/Post/PostComponent";
-
-import Loading from "src/components/Loading";
 
 export default function MyPosts() {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,7 +14,7 @@ export default function MyPosts() {
   const userId = userInfoData ? userInfoData.id : null;
 
   const { myPosts, fetchMyPostsLoading } = useSelector(
-    (state: RootState) => state.posts
+    (state: RootState) => state.posts,
   );
 
   useEffect(() => {

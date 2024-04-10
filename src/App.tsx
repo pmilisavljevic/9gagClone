@@ -1,23 +1,22 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "src/Styles/App.scss";
-
-import MainPage from "src/Pages/Main/MainPage";
-import LoginPage from "src/Pages/Login/LoginPage";
-import SignupPage from "src/Pages/Signup/SignupPage";
-import ProtectedRouteUser from "src/utils/ProtectedRouteUser";
-
 import { Provider } from "react-redux";
-import { store } from "src/store/store";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import MainLayout from "src/Layout/MainLayout";
+import EditProfile from "src/Pages/EditProfile/EditProfile";
+import LoginPage from "src/Pages/Login/LoginPage";
+import MainPage from "src/Pages/Main/MainPage";
+import MyFriends from "src/Pages/MyFriends/MyFriends";
+import MyPosts from "src/Pages/MyPosts/MyPosts";
 import NewPost from "src/Pages/NewPost/NewPost";
 import PostPage from "src/Pages/Post/PostPage";
-import EditProfile from "src/Pages/EditProfile/EditProfile";
+import PostsByFriend from "src/Pages/PostsByFriend/PostsByFriend";
+import PostsLikedByFriend from "src/Pages/PostsLikedByFriend/PostsLikedByFriend";
 import RequestsToMe from "src/Pages/RequestsToMe/RequestsToMe";
-import MyPosts from "src/Pages/MyPosts/MyPosts";
-import MainLayout from "src/Layout/MainLayout";
-import MyFriends from "src/Pages/MyFriends/MyFriends";
-import PostsByFriend from "./Pages/PostsByFriend/PostsByFriend";
-import PostsLikedByFriend from "./Pages/PostsLikedByFriend/PostsLikedByFriend";
-import ProtectedRouteGuest from "./utils/ProtectedRouteGuest";
+import SignupPage from "src/Pages/Signup/SignupPage";
+import "src/Styles/App.scss";
+import { store } from "src/store/store";
+import ProtectedRouteGuest from "src/utils/ProtectedRouteGuest";
+import ProtectedRouteUser from "src/utils/ProtectedRouteUser";
 
 export default function App() {
   return (
@@ -106,17 +105,3 @@ export default function App() {
     </Provider>
   );
 }
-
-/*
-
-TODO
-
-
-
-napraviti folder components sa komponentama (input)
-sortirati const-ove i importe
-
-return type za axios JOS KOJI MOZE
-handlePostReaction - handle za -1 index]\ DONE?
-
-*/

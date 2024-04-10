@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import userSlice from "src/store/userSlice";
+
 import postsSlice from "./postsSlice";
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,11 +1,10 @@
-import { SignUpUser } from "src/services/client";
-
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-// import { toast } from "react-toastify";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+import { SignUpUser } from "src/services/client";
 
 type FormikType = {
   firstName: string;
@@ -33,9 +32,7 @@ export default function SignupPage() {
   const registerUserFunction = async (values: FormikType) => {
     try {
       await SignUpUser(values);
-      // toast.success("Registration successful");
     } catch (err) {
-      // toast.error("There was some problem with registering");
       console.log(err);
     }
   };
@@ -69,8 +66,6 @@ export default function SignupPage() {
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-
-          {/* <form onSubmit={formik.handleSubmit}> */}
 
           <Box
             component="form"
@@ -145,7 +140,6 @@ export default function SignupPage() {
               Submit
             </Button>
           </Box>
-          {/* </form> */}
         </Box>
       </Container>
     </div>

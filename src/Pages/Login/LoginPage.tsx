@@ -1,25 +1,25 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { useFormik } from "formik";
-import * as yup from "yup";
 import {
+  Alert,
   Box,
   Button,
   Container,
   TextField,
   Typography,
-  Alert,
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
+import { AppDispatch } from "src/store/store";
 import {
   fetchUserInfo,
   getToken,
   userError,
   userStatus,
 } from "src/store/userSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "src/store/store";
 
 const validationSchema = yup.object({
   email: yup
